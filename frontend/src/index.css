@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 隱藏 video 鏡像翻轉，使用前置鏡頭時更自然 */
+video.mirror {
+  transform: scaleX(-1);
+}
