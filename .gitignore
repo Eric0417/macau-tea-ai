@@ -1,7 +1,5 @@
 node_modules/
-dist/
 __pycache__/
 *.pyc
-backend/static/
 backend/uploads/
 .env
