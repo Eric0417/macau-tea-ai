@@ -1,5 +1,7 @@
 node_modules/
+frontend/dist/
 __pycache__/
 *.pyc
-backend/uploads/
+data/
 .env
+.DS_Store

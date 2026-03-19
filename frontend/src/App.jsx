@@ -1,44 +1,100 @@
-import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
-import TeaRecognition from "./pages/TeaRecognition";
-import TongueDiagnosis from "./pages/TongueDiagnosis";
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import { Home as HomeIcon, Leaf, Scan, MessageCircle, Clock } from 'lucide-react';
 
-function Navbar() {
-  const location = useLocation();
-  const isActive = (path) => location.pathname === path;
-  const base = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200";
-  const active = "bg-green-700 text-white shadow";
-  const inactive = "text-green-100 hover:bg-green-600";
+import Home from './pages/Home';
+import TeaRecognition from './pages/TeaRecognition';
+import TongueDiagnosis from './pages/TongueDiagnosis';
+import AiConsultation from './pages/AiConsultation';
+import History from './pages/History';
+import ResultPage from './pages/ResultPage';
 
+/* ── 背景 ─────────────────────────────── */
+function Background() {
   return (
-    <nav className="bg-green-800 shadow-lg sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="text-white font-bold text-lg flex items-center gap-2">
-          🍵 澳門茶飲 AI
-        </Link>
-        <div className="flex gap-2">
-          <Link to="/" className={`${base} ${isActive("/") ? active : inactive}`}>首頁</Link>
-          <Link to="/tea" className={`${base} ${isActive("/tea") ? active : inactive}`}>茶飲辨識</Link>
-          <Link to="/tongue" className={`${base} ${isActive("/tongue") ? active : inactive}`}>舌苔識別</Link>
-        </div>
-      </div>
-    </nav>
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900">
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-1/3 -right-32 w-96 h-96 bg-teal-400/15 rounded-full blur-3xl animate-pulse"
+        style={{ animationDelay: '2s' }} />
+      <div className="absolute top-2/3 left-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"
+        style={{ animationDelay: '4s' }} />
+      <div className="absolute -top-20 right-1/4 w-72 h-72 bg-emerald-300/10 rounded-full blur-3xl animate-pulse"
+        style={{ animationDelay: '1s' }} />
+    </div>
   );
 }
 
-function App() {
+/* ── 底部導航 ──────────────────────────── */
+function BottomNav() {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const tabs = [
+    { path: '/',        icon: HomeIcon,       label: '首頁' },
+    { path: '/tea',     icon: Leaf,           label: '茶飲' },
+    { path: '/tongue',  icon: Scan,           label: '舌診' },
+    { path: '/chat',    icon: MessageCircle,  label: '問診' },
+    { path: '/history', icon: Clock,          label: '歷史' },
+  ];
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-3 pb-4">
+      <LayoutGroup>
+        <nav className="mx-auto max-w-md bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-1.5 flex justify-around">
+          {tabs.map(t => {
+            const active = pathname === t.path;
+            return (
+              <button key={t.path} onClick={() => navigate(t.path)}
+                className={`relative flex flex-col items-center gap-0.5 px-4 py-2 rounded-2xl transition-colors duration-200
+                  ${active ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
+                {active && (
+                  <motion.div layoutId="tab-bg"
+                    className="absolute inset-0 bg-white/15 rounded-2xl"
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }} />
+                )}
+                <t.icon size={20} className="relative z-10" />
+                <span className="text-xs relative z-10">{t.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+      </LayoutGroup>
+    </div>
+  );
+}
+
+/* ── App ───────────────────────────────── */
+function AppContent() {
+  const location = useLocation();
+  return (
+    <div className="min-h-screen">
+      <Background />
+      <AnimatePresence mode="wait">
+        <motion.div key={location.pathname}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.25 }}
+          className="pb-28 min-h-screen">
+          <Routes location={location}>
+            <Route path="/"        element={<Home />} />
+            <Route path="/tea"     element={<TeaRecognition />} />
+            <Route path="/tongue"  element={<TongueDiagnosis />} />
+            <Route path="/chat"    element={<AiConsultation />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/result/:id" element={<ResultPage />} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
+      <BottomNav />
+    </div>
+  );
+}
+
+export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/tea" element={<TeaRecognition />} />
-          <Route path="/tongue" element={<TongueDiagnosis />} />
-        </Routes>
-      </div>
+      <AppContent />
     </BrowserRouter>
   );
 }
-
-export default App;

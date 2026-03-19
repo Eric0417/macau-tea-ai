@@ -1,9 +1,24 @@
+databases:
+  - name: macau-tea-db
+    plan: free
+    databaseName: macau_tea_db
+
 services:
   - type: web
     name: macau-tea-ai
     runtime: python
-    buildCommand: cd backend && pip install -r requirements.txt
+    buildCommand: bash build.sh
     startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
+      - key: NODE_VERSION
+        value: "20"
       - key: PYTHON_VERSION
-        value: 3.11.11
+        value: "3.11.0"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: macau-tea-db
+          property: connectionString
+      - key: POE_API_KEY
+        sync: false
+      - key: POE_BOT_NAME
+        value: "GPT-5.4-Nano"

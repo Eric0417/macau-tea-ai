@@ -2,7 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 隱藏 video 鏡像翻轉，使用前置鏡頭時更自然 */
-video.mirror {
-  transform: scaleX(-1);
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
+
+html, body, #root {
+  min-height: 100dvh;
+}
+
+body {
+  background: #050d0a;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 0; }
+
+input, textarea { font-family: inherit; }
