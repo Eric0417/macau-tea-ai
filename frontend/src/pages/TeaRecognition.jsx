@@ -49,8 +49,8 @@ export default function TeaRecognition() {
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <button onClick={() => navigate('/')}
-            className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-2.5 text-white/70 hover:text-white transition-colors">
-            <ArrowLeft size={20} />
+            className="glass glass-thin rounded-2xl p-2.5 text-white/70 hover:text-white transition-colors">
+            <ArrowLeft size={20} className="relative z-10" />
           </button>
           <div>
             <h1 className="text-2xl font-bold text-white">茶飲辨識</h1>
@@ -61,26 +61,29 @@ export default function TeaRecognition() {
         {/* Upload / Preview */}
         {!preview ? (
           <div onClick={() => fileRef.current?.click()}
-            className="bg-white/5 backdrop-blur-xl border-2 border-dashed border-white/20 rounded-3xl p-12 text-center cursor-pointer hover:bg-white/10 hover:border-white/30 transition-all">
-            <div className="bg-white/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            className="glass rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-white/20 hover:border-white/30 transition-all">
+            <div className="bg-white/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
               <Camera size={28} className="text-white/60" />
             </div>
-            <p className="text-white/60 mb-2">點擊上傳茶飲照片</p>
-            <p className="text-white/30 text-sm">支援 JPG、PNG 格式</p>
+            <p className="text-white/60 mb-2 relative z-10">點擊上傳茶飲照片</p>
+            <p className="text-white/30 text-sm relative z-10">支援 JPG、PNG 格式</p>
           </div>
         ) : (
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
             className="relative rounded-3xl overflow-hidden border border-white/20">
             <img src={preview} alt="" className="w-full aspect-square object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 flex gap-3">
+            <div className="absolute bottom-4 left-4 right-4 flex gap-3 z-10">
               <button onClick={reset}
-                className="flex-1 bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl py-3 text-white text-sm font-medium hover:bg-white/30 transition-all">
-                重新選擇
+                className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium">
+                <span className="relative z-10">重新選擇</span>
               </button>
               <button onClick={analyze} disabled={loading}
-                className="flex-1 bg-emerald-500/70 backdrop-blur-lg border border-emerald-400/30 rounded-2xl py-3 text-white text-sm font-medium hover:bg-emerald-500/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
-                {loading ? <><Loader2 size={16} className="animate-spin" />分析中...</> : <><Leaf size={16} />AI 分析</>}
+                className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2">
+                <div className="absolute inset-0 bg-emerald-500/50 rounded-2xl pointer-events-none z-0" />
+                {loading
+                  ? <><Loader2 size={16} className="animate-spin relative z-10" /><span className="relative z-10">分析中...</span></>
+                  : <><Leaf size={16} className="relative z-10" /><span className="relative z-10">AI 分析</span></>}
               </button>
             </div>
           </motion.div>
@@ -92,8 +95,9 @@ export default function TeaRecognition() {
         <AnimatePresence>
           {error && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="mt-4 bg-red-500/20 backdrop-blur-lg border border-red-400/30 rounded-2xl p-4 text-red-200 text-sm">
-              {error}
+              className="mt-4 glass glass-thin rounded-2xl p-4">
+              <div className="absolute inset-0 bg-red-500/20 rounded-2xl pointer-events-none z-0" />
+              <p className="text-red-200 text-sm relative z-10">{error}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -102,20 +106,20 @@ export default function TeaRecognition() {
         <AnimatePresence>
           {result && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6 space-y-3">
-              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6">
-                <div className="flex items-center justify-between mb-3">
+              <div className="glass glass-card rounded-3xl p-6">
+                <div className="flex items-center justify-between mb-3 relative z-10">
                   <h2 className="text-2xl font-bold text-white">{result.name}</h2>
                   <span className="bg-emerald-500/20 border border-emerald-400/30 rounded-full px-3 py-1 text-emerald-300 text-sm font-medium">
                     {Math.round(result.confidence * 100)}%
                   </span>
                 </div>
-                <p className="text-white/60 text-sm">{result.properties}</p>
+                <p className="text-white/60 text-sm relative z-10">{result.properties}</p>
               </div>
               {details.map((d, i) => (
                 <motion.div key={d.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4">
-                  <p className="text-white/80 font-medium text-sm mb-1">{d.emoji} {d.label}</p>
-                  <p className="text-white/55 text-sm leading-relaxed">{d.value}</p>
+                  className="glass glass-thin rounded-2xl p-4">
+                  <p className="text-white/80 font-medium text-sm mb-1 relative z-10">{d.emoji} {d.label}</p>
+                  <p className="text-white/55 text-sm leading-relaxed relative z-10">{d.value}</p>
                 </motion.div>
               ))}
             </motion.div>

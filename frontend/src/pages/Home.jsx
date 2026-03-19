@@ -17,9 +17,9 @@ export default function Home() {
       {/* Hero */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
         className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full px-4 py-2 mb-6">
-          <Sparkles size={16} className="text-emerald-300" />
-          <span className="text-sm text-white/80">AI 智能養生助手</span>
+        <div className="glass glass-thin inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6">
+          <Sparkles size={16} className="text-emerald-300 relative z-10" />
+          <span className="text-sm text-white/80 relative z-10">AI 智能養生助手</span>
         </div>
         <h1 className="text-4xl font-bold text-white mb-3 tracking-tight">澳門茶飲 AI</h1>
         <p className="text-white/50 text-lg leading-relaxed">結合中醫智慧與人工智能<br />為您推薦最適合的茶飲</p>
@@ -32,13 +32,14 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 + i * 0.08 }}
             onClick={() => navigate(f.path)}
-            className={`bg-gradient-to-br ${f.color} backdrop-blur-xl border border-white/15 rounded-3xl p-5 text-left
-              transition-all duration-300 hover:scale-105 hover:border-white/30 active:scale-95`}>
-            <div className="bg-white/15 rounded-2xl w-12 h-12 flex items-center justify-center mb-3">
+            className="glass glass-card rounded-3xl p-5 text-left active:scale-95">
+            {/* 色彩漸層底層 */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${f.color} rounded-3xl pointer-events-none z-0`} />
+            <div className="bg-white/15 rounded-2xl w-12 h-12 flex items-center justify-center mb-3 relative z-10">
               <f.icon size={24} className="text-white" />
             </div>
-            <h3 className="text-white font-semibold mb-1">{f.title}</h3>
-            <p className="text-white/45 text-xs leading-relaxed">{f.desc}</p>
+            <h3 className="text-white font-semibold mb-1 relative z-10">{f.title}</h3>
+            <p className="text-white/45 text-xs leading-relaxed relative z-10">{f.desc}</p>
           </motion.button>
         ))}
       </div>

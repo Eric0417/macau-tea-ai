@@ -9,6 +9,10 @@ import AiConsultation from './pages/AiConsultation';
 import History from './pages/History';
 import ResultPage from './pages/ResultPage';
 
+/* ── Liquid Glass 動畫設定 ────────────── */
+const LG_EASE = [0.2, 0.8, 0.2, 1];
+const LG_DURATION = 0.24;
+
 /* ── 背景 ─────────────────────────────── */
 function Background() {
   return (
@@ -40,12 +44,12 @@ function BottomNav() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-3 pb-4">
       <LayoutGroup>
-        <nav className="mx-auto max-w-md bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-1.5 flex justify-around">
+        <nav className="glass glass-r-xl mx-auto max-w-md p-1.5 flex justify-around">
           {tabs.map(t => {
             const active = pathname === t.path;
             return (
               <button key={t.path} onClick={() => navigate(t.path)}
-                className={`relative flex flex-col items-center gap-0.5 px-4 py-2 rounded-2xl transition-colors duration-200
+                className={`relative z-10 flex flex-col items-center gap-0.5 px-4 py-2 rounded-2xl transition-colors duration-200
                   ${active ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
                 {active && (
                   <motion.div layoutId="tab-bg"
@@ -71,10 +75,11 @@ function AppContent() {
       <Background />
       <AnimatePresence mode="wait">
         <motion.div key={location.pathname}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.25 }}
+          initial={{ opacity: 0, y: 6, scale: 0.99 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -4, scale: 0.99 }}
+          transition={{ duration: LG_DURATION, ease: LG_EASE }}
+          style={{ willChange: 'opacity, transform' }}
           className="pb-28 min-h-screen">
           <Routes location={location}>
             <Route path="/"        element={<Home />} />

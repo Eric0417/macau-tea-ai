@@ -53,8 +53,8 @@ export default function AiConsultation() {
       <div className="shrink-0 px-5 pt-12 pb-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button onClick={() => navigate('/')}
-            className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-2.5 text-white/70 hover:text-white transition-colors">
-            <ArrowLeft size={20} />
+            className="glass glass-thin rounded-2xl p-2.5 text-white/70 hover:text-white transition-colors">
+            <ArrowLeft size={20} className="relative z-10" />
           </button>
           <div>
             <h1 className="text-xl font-bold text-white">AI 茶博士</h1>
@@ -63,8 +63,8 @@ export default function AiConsultation() {
         </div>
         {messages.length > 0 && (
           <button onClick={clear}
-            className="bg-white/10 border border-white/20 rounded-2xl p-2.5 text-white/40 hover:text-red-300 transition-colors">
-            <Trash2 size={18} />
+            className="glass glass-thin rounded-2xl p-2.5 text-white/40 hover:text-red-300 transition-colors">
+            <Trash2 size={18} className="relative z-10" />
           </button>
         )}
       </div>
@@ -78,8 +78,8 @@ export default function AiConsultation() {
             <div className="flex flex-wrap justify-center gap-2">
               {quickQs.map(q => (
                 <button key={q} onClick={() => setInput(q)}
-                  className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white/50 text-xs hover:bg-white/10 transition-all">
-                  {q}
+                  className="glass glass-thin rounded-2xl px-3 py-2 text-white/50 text-xs">
+                  <span className="relative z-10">{q}</span>
                 </button>
               ))}
             </div>
@@ -89,22 +89,23 @@ export default function AiConsultation() {
         {messages.map((m, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
             className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-xs rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-              m.role === 'user'
-                ? 'bg-emerald-500/30 backdrop-blur-lg border border-emerald-400/20 text-white'
-                : 'bg-white/10 backdrop-blur-lg border border-white/15 text-white/80'
+            <div className={`max-w-xs rounded-2xl px-4 py-3 text-sm leading-relaxed glass glass-thin ${
+              m.role === 'user' ? 'text-white' : 'text-white/80'
             }`}>
-              <p className="whitespace-pre-wrap">{m.content}</p>
+              {m.role === 'user' && (
+                <div className="absolute inset-0 bg-emerald-500/25 rounded-2xl pointer-events-none z-0" />
+              )}
+              <p className="whitespace-pre-wrap relative z-10">{m.content}</p>
             </div>
           </motion.div>
         ))}
 
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-white/10 backdrop-blur-lg border border-white/15 rounded-2xl px-4 py-3 flex gap-1.5">
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" />
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />
+            <div className="glass glass-thin rounded-2xl px-4 py-3 flex gap-1.5">
+              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce relative z-10" />
+              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce relative z-10" style={{ animationDelay: '0.15s' }} />
+              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce relative z-10" style={{ animationDelay: '0.3s' }} />
             </div>
           </div>
         )}
@@ -118,10 +119,11 @@ export default function AiConsultation() {
           <input value={input} onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
             placeholder="輸入您的問題…"
-            className="flex-1 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-white/40 transition-all" />
+            className="flex-1 glass glass-thin rounded-2xl px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-white/40 transition-all relative z-10" />
           <button onClick={send} disabled={!input.trim() || loading}
-            className="bg-emerald-500/60 backdrop-blur-lg border border-emerald-400/30 rounded-2xl px-4 text-white hover:bg-emerald-500/80 transition-all disabled:opacity-30">
-            <Send size={18} />
+            className="glass glass-thin rounded-2xl px-4 text-white disabled:opacity-30 transition-all">
+            <div className="absolute inset-0 bg-emerald-500/50 rounded-2xl pointer-events-none z-0" />
+            <Send size={18} className="relative z-10" />
           </button>
         </div>
       </div>
