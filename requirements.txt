@@ -4,3 +4,4 @@ python-multipart
 qrcode[pil]
 Pillow
 asyncpg
+httpx
