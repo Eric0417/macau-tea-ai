@@ -2,10 +2,12 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Camera, Loader2, Leaf, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getUserId } from '../utils/userId';
 
 export default function TeaRecognition() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const fileRef = useRef(null);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -29,17 +31,17 @@ export default function TeaRecognition() {
       const res = await fetch('/api/tea/recognize', { method: 'POST', body: fd });
       const data = await res.json();
       data.error ? setError(data.error) : setResult(data);
-    } catch { setError('分析失敗，請重試'); }
+    } catch { setError(t('tea.error')); }
     finally { setLoading(false); }
   };
 
   const reset = () => { setPreview(null); setImage(null); setResult(null); };
 
   const details = result ? [
-    { label: '功效',   value: result.effects,    emoji: '✨' },
-    { label: '適合人群', value: result.suitable,   emoji: '👍' },
-    { label: '注意事項', value: result.avoid,      emoji: '⚠️' },
-    { label: '飲用建議', value: result.suggestion, emoji: '💡' },
+    { label: t('tea.effects'),   value: result.effects,    emoji: '✨' },
+    { label: t('tea.suitable'),  value: result.suitable,   emoji: '👍' },
+    { label: t('tea.caution'),   value: result.avoid,      emoji: '⚠️' },
+    { label: t('tea.suggestion'), value: result.suggestion, emoji: '💡' },
   ] : [];
 
   return (
@@ -53,8 +55,8 @@ export default function TeaRecognition() {
             <ArrowLeft size={20} className="relative z-10" />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-white">茶飲辨識</h1>
-            <p className="text-white/50 text-sm">拍照或上傳茶飲照片</p>
+            <h1 className="text-2xl font-bold text-white">{t('tea.title')}</h1>
+            <p className="text-white/50 text-sm">{t('tea.subtitle')}</p>
           </div>
         </div>
 
@@ -65,8 +67,8 @@ export default function TeaRecognition() {
             <div className="bg-white/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
               <Camera size={28} className="text-white/60" />
             </div>
-            <p className="text-white/60 mb-2 relative z-10">點擊上傳茶飲照片</p>
-            <p className="text-white/30 text-sm relative z-10">支援 JPG、PNG 格式</p>
+            <p className="text-white/60 mb-2 relative z-10">{t('tea.upload')}</p>
+            <p className="text-white/30 text-sm relative z-10">{t('tea.format')}</p>
           </div>
         ) : (
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
@@ -76,14 +78,14 @@ export default function TeaRecognition() {
             <div className="absolute bottom-4 left-4 right-4 flex gap-3 z-10">
               <button onClick={reset}
                 className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium">
-                <span className="relative z-10">重新選擇</span>
+                <span className="relative z-10">{t('tea.retry')}</span>
               </button>
               <button onClick={analyze} disabled={loading}
                 className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2">
                 <div className="absolute inset-0 bg-emerald-500/50 rounded-2xl pointer-events-none z-0" />
                 {loading
-                  ? <><Loader2 size={16} className="animate-spin relative z-10" /><span className="relative z-10">分析中...</span></>
-                  : <><Leaf size={16} className="relative z-10" /><span className="relative z-10">AI 分析</span></>}
+                  ? <><Loader2 size={16} className="animate-spin relative z-10" /><span className="relative z-10">{t('tea.analyzing')}</span></>
+                  : <><Leaf size={16} className="relative z-10" /><span className="relative z-10">{t('tea.analyze')}</span></>}
               </button>
             </div>
           </motion.div>

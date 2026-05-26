@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "home": "Início",
+    "tea": "Chá",
+    "tongue": "Língua",
+    "chat": "Consultar",
+    "history": "Histórico"
+  },
+  "home": {
+    "badge": "Assistente de Bem-Estar IA",
+    "title": "Macau Chá IA",
+    "subtitle1": "Sabedoria Chinesa Encontra IA",
+    "subtitle2": "Encontre o Chá Perfeito para Si",
+    "features": {
+      "tea": { "title": "Reconhecer Chá", "desc": "IA identifica tipos de chá e benefícios" },
+      "tongue": { "title": "Análise da Língua", "desc": "Diagnóstico da língua por IA e recomendações" },
+      "chat": { "title": "Consulta IA", "desc": "Converse com o Doutor do Chá sobre saúde" },
+      "history": { "title": "Histórico", "desc": "Veja registos anteriores" }
+    }
+  },
+  "tea": {
+    "title": "Reconhecer Chá",
+    "subtitle": "Tire ou carregue uma foto do chá",
+    "upload": "Clique para carregar foto do chá",
+    "format": "Suporta JPG, PNG",
+    "retry": "Re-selecionar",
+    "analyze": "Análise IA",
+    "analyzing": "A analisar...",
+    "error": "Falha na análise, tente novamente",
+    "effects": "Efeitos",
+    "suitable": "Adequado Para",
+    "caution": "Precauções",
+    "suggestion": "Sugestões"
+  },
+  "tongue": {
+    "title": "Análise da Língua",
+    "subtitle": "Tire uma foto da língua para análise IA",
+    "upload": "Clique para carregar foto da língua",
+    "tip": "Estique a língua, melhor com luz natural",
+    "retry": "Re-selecionar",
+    "diagnose": "Diagnóstico IA da Língua",
+    "analyzing": "A analisar...",
+    "error": "Falha na análise, tente novamente",
+    "analysis": "Análise Detalhada",
+    "symptoms": "Sintomas Comuns",
+    "advice": "Conselhos de Saúde",
+    "recommended": "🍵 Chás Recomendados"
+  },
+  "chat": {
+    "title": "Doutor do Chá IA",
+    "subtitle": "Seu Consultor de Bem-Estar com Chá",
+    "empty": "Pergunte ao Doutor do Chá sobre chás e saúde",
+    "q1": "Tenho tendência a inflamações, que chá devo beber?",
+    "q2": "Quais são os benefícios do chá Pu-erh?",
+    "q3": "Que chá é bom para a noite?",
+    "q4": "As minhas mãos e pés estão sempre frios, o que fazer?",
+    "placeholder": "Escreva a sua pergunta…",
+    "error": "Desculpe, ocorreu um erro 😞"
+  },
+  "result": {
+    "notFound": "Registo não encontrado",
+    "backHistory": "Voltar ao Histórico",
+    "back": "Voltar",
+    "confidence": "Confiança de Reconhecimento",
+    "nature": "Natureza do Chá",
+    "effects": "Efeitos",
+    "suitable": "Adequado Para",
+    "caution": "Precauções",
+    "suggestion": "Sugestões",
+    "diagnosis": "Diagnóstico",
+    "analysis": "Análise Detalhada",
+    "symptoms": "Sintomas Comuns",
+    "advice": "Conselhos de Saúde",
+    "recommended": "🍵 Chás Recomendados"
+  },
+  "history": {
+    "title": "Histórico",
+    "clearAll": "Limpar Tudo",
+    "empty": "Ainda não há registos"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "tea": "お茶",
+    "tongue": "舌",
+    "chat": "相談",
+    "history": "履歴"
+  },
+  "home": {
+    "badge": "AIウェルネスアシスタント",
+    "title": "マカオティー AI",
+    "subtitle1": "中医の知恵とAIの融合",
+    "subtitle2": "あなたに最適なお茶をご提案",
+    "features": {
+      "tea": { "title": "お茶認識", "desc": "AIがお茶の種類と効能を識別" },
+      "tongue": { "title": "舌診断", "desc": "AI舌診断とお茶のレコメンド" },
+      "chat": { "title": "AI相談", "desc": "茶博士と健康についてチャット" },
+      "history": { "title": "履歴", "desc": "過去の認識・相談記録を確認" }
+    }
+  },
+  "tea": {
+    "title": "お茶認識",
+    "subtitle": "お茶の写真を撮るかアップロード",
+    "upload": "クリックしてお茶の写真をアップロード",
+    "format": "JPG、PNG対応",
+    "retry": "再選択",
+    "analyze": "AI分析",
+    "analyzing": "分析中...",
+    "error": "分析に失敗しました。もう一度お試しください",
+    "effects": "効能",
+    "suitable": "適した人",
+    "caution": "注意事項",
+    "suggestion": "飲用アドバイス"
+  },
+  "tongue": {
+    "title": "舌診断",
+    "subtitle": "舌の写真を撮ってAI分析",
+    "upload": "クリックして舌の写真をアップロード",
+    "tip": "舌を出して、自然光での撮影がベスト",
+    "retry": "再選択",
+    "diagnose": "AI舌診断",
+    "analyzing": "分析中...",
+    "error": "分析に失敗しました。もう一度お試しください",
+    "analysis": "詳細分析",
+    "symptoms": "一般的な症状",
+    "advice": "健康アドバイス",
+    "recommended": "🍵 おすすめのお茶"
+  },
+  "chat": {
+    "title": "AI茶博士",
+    "subtitle": "あなたのウェルネス茶コンサルタント",
+    "empty": "茶博士にお茶や健康について質問してください",
+    "q1": "体に熱がこもりがちですが、どんなお茶を飲めばいいですか？",
+    "q2": "プーアル茶の効能は？",
+    "q3": "夜に飲むのに適したお茶は？",
+    "q4": "手足が冷えやすいのですが、どうすればいいですか？",
+    "placeholder": "質問を入力…",
+    "error": "申し訳ございません、エラーが発生しました 😞"
+  },
+  "result": {
+    "notFound": "記録が見つかりません",
+    "backHistory": "履歴に戻る",
+    "back": "戻る",
+    "confidence": "認識信頼度",
+    "nature": "お茶の性質",
+    "effects": "効能",
+    "suitable": "適した人",
+    "caution": "注意事項",
+    "suggestion": "飲用アドバイス",
+    "diagnosis": "診断",
+    "analysis": "詳細分析",
+    "symptoms": "一般的な症状",
+    "advice": "健康アドバイス",
+    "recommended": "🍵 おすすめのお茶"
+  },
+  "history": {
+    "title": "履歴",
+    "clearAll": "すべて削除",
+    "empty": "まだ記録がありません"
+  }
+}

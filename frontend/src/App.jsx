@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { Home as HomeIcon, Leaf, Scan, MessageCircle, Clock } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import Home from './pages/Home';
 import TeaRecognition from './pages/TeaRecognition';
@@ -8,6 +9,7 @@ import TongueDiagnosis from './pages/TongueDiagnosis';
 import AiConsultation from './pages/AiConsultation';
 import History from './pages/History';
 import ResultPage from './pages/ResultPage';
+import LanguageSwitcher from './components/LanguageSwitcher';
 
 /* ── Liquid Glass 動畫設定 ────────────── */
 const LG_EASE = [0.2, 0.8, 0.2, 1];
@@ -32,13 +34,14 @@ function Background() {
 function BottomNav() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   const tabs = [
-    { path: '/',        icon: HomeIcon,       label: '首頁' },
-    { path: '/tea',     icon: Leaf,           label: '茶飲' },
-    { path: '/tongue',  icon: Scan,           label: '舌診' },
-    { path: '/chat',    icon: MessageCircle,  label: '問診' },
-    { path: '/history', icon: Clock,          label: '歷史' },
+    { path: '/',        icon: HomeIcon,       label: t('nav.home') },
+    { path: '/tea',     icon: Leaf,           label: t('nav.tea') },
+    { path: '/tongue',  icon: Scan,           label: t('nav.tongue') },
+    { path: '/chat',    icon: MessageCircle,  label: t('nav.chat') },
+    { path: '/history', icon: Clock,          label: t('nav.history') },
   ];
 
   return (

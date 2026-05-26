@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Leaf, Scan } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getUserId } from '../utils/userId';
 
 export default function ResultPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { id } = useParams();
   const [record, setRecord] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,8 +28,8 @@ export default function ResultPage() {
   );
   if (!record) return (
     <div className="text-center pt-32 px-5">
-      <p className="text-white/40 mb-4">找不到紀錄</p>
-      <button onClick={() => navigate('/history')} className="text-emerald-300 text-sm">返回歷史紀錄</button>
+      <p className="text-white/40 mb-4">{t('result.notFound')}</p>
+      <button onClick={() => navigate('/history')} className="text-emerald-300 text-sm">{t('result.backHistory')}</button>
     </div>
   );
 
@@ -35,17 +37,17 @@ export default function ResultPage() {
 
   const items = tea
     ? [
-        { l: '茶性', v: record.properties, e: '🍃' },
-        { l: '功效', v: record.effects, e: '✨' },
-        { l: '適合人群', v: record.suitable, e: '👍' },
-        { l: '注意事項', v: record.avoid, e: '⚠️' },
-        { l: '飲用建議', v: record.suggestion, e: '💡' },
+        { l: t('result.nature'), v: record.properties, e: '🍃' },
+        { l: t('result.effects'), v: record.effects, e: '✨' },
+        { l: t('result.suitable'), v: record.suitable, e: '👍' },
+        { l: t('result.caution'), v: record.avoid, e: '⚠️' },
+        { l: t('result.suggestion'), v: record.suggestion, e: '💡' },
       ]
     : [
-        { l: '舌象', v: record.diagnosis, e: '👅' },
-        { l: '詳細分析', v: record.detail, e: '🔍' },
-        { l: '常見症狀', v: record.symptoms, e: '📋' },
-        { l: '調理建議', v: record.recommendation, e: '💡' },
+        { l: t('result.diagnosis'), v: record.diagnosis, e: '👅' },
+        { l: t('result.analysis'), v: record.detail, e: '🔍' },
+        { l: t('result.symptoms'), v: record.symptoms, e: '📋' },
+        { l: t('result.advice'), v: record.recommendation, e: '💡' },
       ];
 
   return (
@@ -53,7 +55,7 @@ export default function ResultPage() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
         <button onClick={() => navigate('/history')}
           className="flex items-center gap-2 text-white/50 hover:text-white mb-6 transition-colors text-sm">
-          <ArrowLeft size={18} /> 返回
+          <ArrowLeft size={18} /> {t('result.back')}
         </button>
 
         {/* Header */}
@@ -64,12 +66,12 @@ export default function ResultPage() {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-white">{tea ? record.name : record.constitution}</h1>
-              <p className="text-white/40 text-xs">{new Date(record.created_at).toLocaleString('zh-TW')}</p>
+              <p className="text-white/40 text-xs">{new Date(record.created_at).toLocaleString()}</p>
             </div>
           </div>
           {tea && record.confidence && (
             <span className="inline-block bg-emerald-500/15 border border-emerald-400/20 rounded-full px-3 py-1 text-emerald-300 text-sm relative z-10">
-              辨識信心度 {Math.round(record.confidence * 100)}%
+              {t('result.confidence')} {Math.round(record.confidence * 100)}%
             </span>
           )}
         </div>
@@ -87,7 +89,7 @@ export default function ResultPage() {
           {!tea && record.teas?.length > 0 && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
               className="glass glass-thin rounded-2xl p-4">
-              <p className="text-white/80 font-medium text-sm mb-3 relative z-10">🍵 推薦茶飲</p>
+              <p className="text-white/80 font-medium text-sm mb-3 relative z-10">{t('result.recommended')}</p>
               <div className="flex flex-wrap gap-2 relative z-10">
                 {record.teas.map(t => (
                   <span key={t} className="bg-emerald-500/15 border border-emerald-400/20 rounded-full px-3 py-1.5 text-emerald-300 text-sm">{t}</span>

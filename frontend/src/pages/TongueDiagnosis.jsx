@@ -2,10 +2,12 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Camera, Loader2, Scan, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getUserId } from '../utils/userId';
 
 export default function TongueDiagnosis() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const fileRef = useRef(null);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -29,7 +31,7 @@ export default function TongueDiagnosis() {
       const res = await fetch('/api/tongue/diagnose', { method: 'POST', body: fd });
       const data = await res.json();
       data.error ? setError(data.error) : setResult(data);
-    } catch { setError('分析失敗，請重試'); }
+    } catch { setError(t('tongue.error')); }
     finally { setLoading(false); }
   };
 
@@ -46,8 +48,8 @@ export default function TongueDiagnosis() {
             <ArrowLeft size={20} className="relative z-10" />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-white">舌象分析</h1>
-            <p className="text-white/50 text-sm">拍攝舌頭照片進行 AI 分析</p>
+            <h1 className="text-2xl font-bold text-white">{t('tongue.title')}</h1>
+            <p className="text-white/50 text-sm">{t('tongue.subtitle')}</p>
           </div>
         </div>
 
@@ -58,8 +60,8 @@ export default function TongueDiagnosis() {
             <div className="bg-white/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
               <Camera size={28} className="text-white/60" />
             </div>
-            <p className="text-white/60 mb-2 relative z-10">點擊上傳舌頭照片</p>
-            <p className="text-white/30 text-sm relative z-10">伸出舌頭，自然光下拍攝效果最佳</p>
+            <p className="text-white/60 mb-2 relative z-10">{t('tongue.upload')}</p>
+            <p className="text-white/30 text-sm relative z-10">{t('tongue.tip')}</p>
           </div>
         ) : (
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
@@ -69,14 +71,14 @@ export default function TongueDiagnosis() {
             <div className="absolute bottom-4 left-4 right-4 flex gap-3 z-10">
               <button onClick={reset}
                 className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium">
-                <span className="relative z-10">重新選擇</span>
+                <span className="relative z-10">{t('tongue.retry')}</span>
               </button>
               <button onClick={analyze} disabled={loading}
                 className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2">
                 <div className="absolute inset-0 bg-rose-500/50 rounded-2xl pointer-events-none z-0" />
                 {loading
-                  ? <><Loader2 size={16} className="animate-spin relative z-10" /><span className="relative z-10">分析中...</span></>
-                  : <><Scan size={16} className="relative z-10" /><span className="relative z-10">AI 舌診</span></>}
+                  ? <><Loader2 size={16} className="animate-spin relative z-10" /><span className="relative z-10">{t('tongue.analyzing')}</span></>
+                  : <><Scan size={16} className="relative z-10" /><span className="relative z-10">{t('tongue.diagnose')}</span></>}
               </button>
             </div>
           </motion.div>
@@ -105,9 +107,9 @@ export default function TongueDiagnosis() {
               </div>
 
               {[
-                { label: '詳細分析', value: result.detail,          emoji: '🔍' },
-                { label: '常見症狀', value: result.symptoms,        emoji: '📋' },
-                { label: '調理建議', value: result.recommendation,  emoji: '💡' },
+                { label: t('tongue.analysis'), value: result.detail,          emoji: '🔍' },
+                { label: t('tongue.symptoms'), value: result.symptoms,        emoji: '📋' },
+                { label: t('tongue.advice'),   value: result.recommendation,  emoji: '💡' },
               ].map((d, i) => (
                 <motion.div key={d.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }}
                   className="glass glass-thin rounded-2xl p-4">
@@ -119,7 +121,7 @@ export default function TongueDiagnosis() {
               {result.teas?.length > 0 && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
                   className="glass glass-thin rounded-2xl p-4">
-                  <p className="text-white/80 font-medium text-sm mb-3 relative z-10">🍵 推薦茶飲</p>
+                  <p className="text-white/80 font-medium text-sm mb-3 relative z-10">{t('tongue.recommended')}</p>
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {result.teas.map(t => (
                       <span key={t} className="bg-emerald-500/15 border border-emerald-400/20 rounded-full px-3 py-1.5 text-emerald-300 text-sm">{t}</span>

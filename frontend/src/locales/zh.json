@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "home": "首頁",
+    "tea": "茶飲",
+    "tongue": "舌診",
+    "chat": "問診",
+    "history": "歷史"
+  },
+  "home": {
+    "badge": "AI 智能養生助手",
+    "title": "澳門茶飲 AI",
+    "subtitle1": "結合中醫智慧與人工智能",
+    "subtitle2": "為您推薦最適合的茶飲",
+    "features": {
+      "tea": { "title": "茶飲辨識", "desc": "AI 智能辨識茶飲種類與功效" },
+      "tongue": { "title": "舌象分析", "desc": "AI 舌診體質辨識與茶飲建議" },
+      "chat": { "title": "AI 問診", "desc": "與茶博士對話，諮詢養生建議" },
+      "history": { "title": "歷史紀錄", "desc": "查看過去的辨識與問診紀錄" }
+    }
+  },
+  "tea": {
+    "title": "茶飲辨識",
+    "subtitle": "拍照或上傳茶飲照片",
+    "upload": "點擊上傳茶飲照片",
+    "format": "支援 JPG、PNG 格式",
+    "retry": "重新選擇",
+    "analyze": "AI 分析",
+    "analyzing": "分析中...",
+    "error": "分析失敗，請重試",
+    "effects": "功效",
+    "suitable": "適合人群",
+    "caution": "注意事項",
+    "suggestion": "飲用建議"
+  },
+  "tongue": {
+    "title": "舌象分析",
+    "subtitle": "拍攝舌頭照片進行 AI 分析",
+    "upload": "點擊上傳舌頭照片",
+    "tip": "伸出舌頭，自然光下拍攝效果最佳",
+    "retry": "重新選擇",
+    "diagnose": "AI 舌診",
+    "analyzing": "分析中...",
+    "error": "分析失敗，請重試",
+    "analysis": "詳細分析",
+    "symptoms": "常見症狀",
+    "advice": "調理建議",
+    "recommended": "🍵 推薦茶飲"
+  },
+  "chat": {
+    "title": "AI 茶博士",
+    "subtitle": "您的養生茶飲顧問",
+    "empty": "向茶博士提問任何茶飲和養生問題",
+    "q1": "我容易上火，喝什麼茶好？",
+    "q2": "普洱茶有什麼功效？",
+    "q3": "晚上適合喝什麼茶？",
+    "q4": "手腳冰冷怎麼調理？",
+    "placeholder": "輸入您的問題…",
+    "error": "抱歉，發生了錯誤 😞"
+  },
+  "result": {
+    "notFound": "找不到紀錄",
+    "backHistory": "返回歷史紀錄",
+    "back": "返回",
+    "confidence": "辨識信心度",
+    "nature": "茶性",
+    "effects": "功效",
+    "suitable": "適合人群",
+    "caution": "注意事項",
+    "suggestion": "飲用建議",
+    "diagnosis": "舌象",
+    "analysis": "詳細分析",
+    "symptoms": "常見症狀",
+    "advice": "調理建議",
+    "recommended": "🍵 推薦茶飲"
+  },
+  "history": {
+    "title": "歷史紀錄",
+    "clearAll": "清空全部",
+    "empty": "還沒有任何紀錄"
+  }
+}

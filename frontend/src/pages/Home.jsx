@@ -1,15 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Leaf, Scan, MessageCircle, Clock, Sparkles } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 export default function Home() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const features = [
-    { path: '/tea',     icon: Leaf,           title: '茶飲辨識', desc: 'AI 智能辨識茶飲種類與功效',      color: 'from-emerald-500/20 to-green-600/20' },
-    { path: '/tongue',  icon: Scan,           title: '舌象分析', desc: 'AI 舌診體質辨識與茶飲建議',      color: 'from-rose-500/20 to-pink-600/20' },
-    { path: '/chat',    icon: MessageCircle,  title: 'AI 問診',  desc: '與茶博士對話，諮詢養生建議',     color: 'from-blue-500/20 to-cyan-600/20' },
-    { path: '/history', icon: Clock,          title: '歷史紀錄', desc: '查看過去的辨識與問診紀錄',       color: 'from-amber-500/20 to-orange-600/20' },
+    { path: '/tea',     icon: Leaf,           title: t('home.features.tea.title'),     desc: t('home.features.tea.desc'),     color: 'from-emerald-500/20 to-green-600/20' },
+    { path: '/tongue',  icon: Scan,           title: t('home.features.tongue.title'),   desc: t('home.features.tongue.desc'),  color: 'from-rose-500/20 to-pink-600/20' },
+    { path: '/chat',    icon: MessageCircle,  title: t('home.features.chat.title'),     desc: t('home.features.chat.desc'),    color: 'from-blue-500/20 to-cyan-600/20' },
+    { path: '/history', icon: Clock,          title: t('home.features.history.title'),  desc: t('home.features.history.desc'), color: 'from-amber-500/20 to-orange-600/20' },
   ];
 
   return (
@@ -17,12 +20,15 @@ export default function Home() {
       {/* Hero */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
         className="text-center mb-10">
+        <div className="flex justify-end mb-4">
+          <LanguageSwitcher />
+        </div>
         <div className="glass glass-thin inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6">
           <Sparkles size={16} className="text-emerald-300 relative z-10" />
-          <span className="text-sm text-white/80 relative z-10">AI 智能養生助手</span>
+          <span className="text-sm text-white/80 relative z-10">{t('home.badge')}</span>
         </div>
-        <h1 className="text-4xl font-bold text-white mb-3 tracking-tight">澳門茶飲 AI</h1>
-        <p className="text-white/50 text-lg leading-relaxed">結合中醫智慧與人工智能<br />為您推薦最適合的茶飲</p>
+        <h1 className="text-4xl font-bold text-white mb-3 tracking-tight">{t('home.title')}</h1>
+        <p className="text-white/50 text-lg leading-relaxed">{t('home.subtitle1')}<br />{t('home.subtitle2')}</p>
       </motion.div>
 
       {/* Cards */}

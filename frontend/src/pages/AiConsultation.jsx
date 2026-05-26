@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Loader2, Trash2, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getUserId } from '../utils/userId';
 
 export default function AiConsultation() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const userId = getUserId();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -36,7 +38,7 @@ export default function AiConsultation() {
       const d = await r.json();
       setMessages(p => [...p, { role: 'assistant', content: d.reply }]);
     } catch {
-      setMessages(p => [...p, { role: 'assistant', content: '抱歉，發生了錯誤 😞' }]);
+      setMessages(p => [...p, { role: 'assistant', content: t('chat.error') }]);
     } finally { setLoading(false); }
   };
 
@@ -45,7 +47,7 @@ export default function AiConsultation() {
     setMessages([]);
   };
 
-  const quickQs = ['我容易上火，喝什麼茶好？', '普洱茶有什麼功效？', '晚上適合喝什麼茶？', '手腳冰冷怎麼調理？'];
+  const quickQs = [t('chat.q1'), t('chat.q2'), t('chat.q3'), t('chat.q4')];
 
   return (
     <div className="flex flex-col h-screen max-w-lg mx-auto">
@@ -57,8 +59,8 @@ export default function AiConsultation() {
             <ArrowLeft size={20} className="relative z-10" />
           </button>
           <div>
-            <h1 className="text-xl font-bold text-white">AI 茶博士</h1>
-            <p className="text-white/40 text-xs">您的養生茶飲顧問</p>
+            <h1 className="text-xl font-bold text-white">{t('chat.title')}</h1>
+            <p className="text-white/40 text-xs">{t('chat.subtitle')}</p>
           </div>
         </div>
         {messages.length > 0 && (
@@ -74,7 +76,7 @@ export default function AiConsultation() {
         {messages.length === 0 && !loading && (
           <div className="text-center pt-20">
             <p className="text-5xl mb-4">🍵</p>
-            <p className="text-white/40 text-sm mb-6">向茶博士提問任何茶飲和養生問題</p>
+            <p className="text-white/40 text-sm mb-6">{t('chat.empty')}</p>
             <div className="flex flex-wrap justify-center gap-2">
               {quickQs.map(q => (
                 <button key={q} onClick={() => setInput(q)}
@@ -118,7 +120,7 @@ export default function AiConsultation() {
         <div className="flex gap-2">
           <input value={input} onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
-            placeholder="輸入您的問題…"
+            placeholder={t('chat.placeholder')}
             className="flex-1 glass glass-thin rounded-2xl px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-white/40 transition-all relative z-10" />
           <button onClick={send} disabled={!input.trim() || loading}
             className="glass glass-thin rounded-2xl px-4 text-white disabled:opacity-30 transition-all">

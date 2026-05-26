@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "home": "Home",
+    "tea": "Tea",
+    "tongue": "Tongue",
+    "chat": "Chat",
+    "history": "History"
+  },
+  "home": {
+    "badge": "AI Wellness Assistant",
+    "title": "Macau Tea AI",
+    "subtitle1": "Where Chinese Wisdom Meets AI",
+    "subtitle2": "Find Your Perfect Tea",
+    "features": {
+      "tea": { "title": "Tea Recognition", "desc": "AI identifies tea types and benefits" },
+      "tongue": { "title": "Tongue Analysis", "desc": "AI tongue diagnosis & tea recommendations" },
+      "chat": { "title": "AI Consultation", "desc": "Chat with Tea Doctor for wellness advice" },
+      "history": { "title": "History", "desc": "View past identification records" }
+    }
+  },
+  "tea": {
+    "title": "Tea Recognition",
+    "subtitle": "Take or upload a tea photo",
+    "upload": "Click to upload tea photo",
+    "format": "Supports JPG, PNG",
+    "retry": "Re-select",
+    "analyze": "AI Analyze",
+    "analyzing": "Analyzing...",
+    "error": "Analysis failed, please try again",
+    "effects": "Effects",
+    "suitable": "Suitable For",
+    "caution": "Cautions",
+    "suggestion": "Suggestions"
+  },
+  "tongue": {
+    "title": "Tongue Analysis",
+    "subtitle": "Take a tongue photo for AI analysis",
+    "upload": "Click to upload tongue photo",
+    "tip": "Stick out your tongue, best in natural light",
+    "retry": "Re-select",
+    "diagnose": "AI Tongue Diagnosis",
+    "analyzing": "Analyzing...",
+    "error": "Analysis failed, please try again",
+    "analysis": "Detailed Analysis",
+    "symptoms": "Common Symptoms",
+    "advice": "Wellness Advice",
+    "recommended": "🍵 Recommended Teas"
+  },
+  "chat": {
+    "title": "AI Tea Doctor",
+    "subtitle": "Your Wellness Tea Consultant",
+    "empty": "Ask the Tea Doctor any questions about tea and wellness",
+    "q1": "I get上火 easily, what tea should I drink?",
+    "q2": "What are the benefits of Pu-erh tea?",
+    "q3": "What tea is good for evening?",
+    "q4": "My hands and feet are always cold, what can I do?",
+    "placeholder": "Type your question…",
+    "error": "Sorry, something went wrong 😞"
+  },
+  "result": {
+    "notFound": "Record not found",
+    "backHistory": "Back to History",
+    "back": "Back",
+    "confidence": "Recognition Confidence",
+    "nature": "Tea Nature",
+    "effects": "Effects",
+    "suitable": "Suitable For",
+    "caution": "Cautions",
+    "suggestion": "Suggestions",
+    "diagnosis": "Diagnosis",
+    "analysis": "Detailed Analysis",
+    "symptoms": "Common Symptoms",
+    "advice": "Wellness Advice",
+    "recommended": "🍵 Recommended Teas"
+  },
+  "history": {
+    "title": "History",
+    "clearAll": "Clear All",
+    "empty": "No records yet"
+  }
+}

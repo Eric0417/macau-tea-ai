@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "home": "홈",
+    "tea": "차",
+    "tongue": "혀",
+    "chat": "상담",
+    "history": "기록"
+  },
+  "home": {
+    "badge": "AI 웰니스 어시스턴트",
+    "title": "마카오 티 AI",
+    "subtitle1": "중의학 지혜와 AI의 만남",
+    "subtitle2": "당신에게 가장 적합한 차를 추천합니다",
+    "features": {
+      "tea": { "title": "차 인식", "desc": "AI가 차 종류와 효능을 식별합니다" },
+      "tongue": { "title": "혀 분석", "desc": "AI 혀 진단 및 차 추천" },
+      "chat": { "title": "AI 상담", "desc": "차 박사와 건강 상담하기" },
+      "history": { "title": "기록", "desc": "과거 인식 기록 보기" }
+    }
+  },
+  "tea": {
+    "title": "차 인식",
+    "subtitle": "차 사진을 찍거나 업로드하세요",
+    "upload": "클릭하여 차 사진 업로드",
+    "format": "JPG, PNG 지원",
+    "retry": "다시 선택",
+    "analyze": "AI 분석",
+    "analyzing": "분석 중...",
+    "error": "분석 실패, 다시 시도해주세요",
+    "effects": "효능",
+    "suitable": "적합한 사람",
+    "caution": "주의사항",
+    "suggestion": "섭취 제안"
+  },
+  "tongue": {
+    "title": "혀 분석",
+    "subtitle": "혀 사진을 찍어 AI 분석하기",
+    "upload": "클릭하여 혀 사진 업로드",
+    "tip": "혀를 내밀고 자연광에서 촬영하세요",
+    "retry": "다시 선택",
+    "diagnose": "AI 혀 진단",
+    "analyzing": "분석 중...",
+    "error": "분석 실패, 다시 시도해주세요",
+    "analysis": "상세 분석",
+    "symptoms": "일반적인 증상",
+    "advice": "건강 조언",
+    "recommended": "🍵 추천 차"
+  },
+  "chat": {
+    "title": "AI 차 박사",
+    "subtitle": "당신의 웰니스 차 컨설턴트",
+    "empty": "차 박사에게 차와 건강에 대해 물어보세요",
+    "q1": "열이 잘 나는데 어떤 차를 마셔야 하나요?",
+    "q2": "보이차의 효능은 무엇인가요?",
+    "q3": "저녁에 마시기 좋은 차는 무엇인가요?",
+    "q4": "손발이 항상 차가운데 어떻게 해야 하나요?",
+    "placeholder": "질문을 입력하세요…",
+    "error": "죄송합니다, 오류가 발생했습니다 😞"
+  },
+  "result": {
+    "notFound": "기록을 찾을 수 없습니다",
+    "backHistory": "기록으로 돌아가기",
+    "back": "뒤로",
+    "confidence": "인식 신뢰도",
+    "nature": "차의 성질",
+    "effects": "효능",
+    "suitable": "적합한 사람",
+    "caution": "주의사항",
+    "suggestion": "섭취 제안",
+    "diagnosis": "진단",
+    "analysis": "상세 분석",
+    "symptoms": "일반적인 증상",
+    "advice": "건강 조언",
+    "recommended": "🍵 추천 차"
+  },
+  "history": {
+    "title": "기록",
+    "clearAll": "전체 삭제",
+    "empty": "아직 기록이 없습니다"
+  }
+}

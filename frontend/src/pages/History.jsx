@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Leaf, Scan, Trash2, ChevronRight, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getUserId } from '../utils/userId';
 
 export default function History() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const userId = getUserId();
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,12 +45,12 @@ export default function History() {
             className="glass glass-thin rounded-2xl p-2.5 text-white/70 hover:text-white transition-colors">
             <ArrowLeft size={20} className="relative z-10" />
           </button>
-          <h1 className="text-2xl font-bold text-white">歷史紀錄</h1>
+          <h1 className="text-2xl font-bold text-white">{t('history.title')}</h1>
         </div>
         {records.length > 0 && (
           <button onClick={clearAll}
             className="glass glass-thin rounded-2xl px-3 py-2 text-white/50 text-xs hover:text-red-300 transition-colors">
-            <span className="relative z-10">清空全部</span>
+            <span className="relative z-10">{t('history.clearAll')}</span>
           </button>
         )}
       </div>
@@ -60,7 +62,7 @@ export default function History() {
       ) : records.length === 0 ? (
         <div className="text-center pt-24">
           <Clock size={48} className="text-white/15 mx-auto mb-4" />
-          <p className="text-white/30">還沒有任何紀錄</p>
+          <p className="text-white/30">{t('history.empty')}</p>
         </div>
       ) : (
         <div className="space-y-2.5">
