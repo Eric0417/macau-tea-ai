@@ -15,6 +15,13 @@ import uuid, json, os, base64, re, ssl, random
 import asyncpg
 import httpx
 
+
+def contains_chinese(text: str) -> bool:
+    """Check if text contains Chinese characters."""
+    if not text:
+        return False
+    return bool(re.search(r'[一-鿿㐀-䶿]', text))
+
 try:
     from PIL import Image
     HAS_PIL = True
@@ -500,6 +507,9 @@ async def tea_recognize(file: UploadFile = File(...), user_id: str = Form("anony
     ai = parse_json_from_ai(raw) if raw else None
     if not ai:
         ai = random.choice(mock_list)
+    elif language != "zh" and any(contains_chinese(str(v)) for v in ai.values() if isinstance(v, str)):
+        print(f"⚠️ AI returned Chinese for language={language}, using mock data instead")
+        ai = random.choice(mock_list)
 
     record = {
         "id": str(uuid.uuid4()), "user_id": user_id, "type": "tea",
@@ -530,6 +540,9 @@ async def tongue_diagnose(file: UploadFile = File(...), user_id: str = Form("ano
     ai = parse_json_from_ai(raw) if raw else None
     mock_list = MOCK_TONGUES_BY_LANG.get(language, MOCK_TONGUES)
     if not ai:
+        ai = random.choice(mock_list)
+    elif language != "zh" and any(contains_chinese(str(v)) for v in ai.values() if isinstance(v, str)):
+        print(f"⚠️ AI returned Chinese for language={language}, using mock data instead")
         ai = random.choice(mock_list)
 
     record = {
