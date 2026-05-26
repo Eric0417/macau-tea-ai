@@ -83,7 +83,7 @@ export default function TeaRecognition() {
               </button>
               <button onClick={analyze} disabled={loading}
                 className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2">
-                <div className="absolute inset-0 bg-emerald-500/50 rounded-2xl pointer-events-none z-0" />
+                <div className="absolute inset-0 bg-herbal-sage-500/45 rounded-2xl pointer-events-none z-0" />
                 {loading
                   ? <><Loader2 size={16} className="animate-spin relative z-10" /><span className="relative z-10">{t('tea.analyzing')}</span></>
                   : <><Leaf size={16} className="relative z-10" /><span className="relative z-10">{t('tea.analyze')}</span></>}
@@ -109,10 +109,10 @@ export default function TeaRecognition() {
         <AnimatePresence>
           {result && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6 space-y-3">
-              <div className="glass glass-card rounded-3xl p-6">
+              <div className="glass glass-card rounded-3xl p-6 azulejo-frame">
                 <div className="flex items-center justify-between mb-3 relative z-10">
                   <h2 className="text-2xl font-bold text-white">{result.name}</h2>
-                  <span className="bg-emerald-500/20 border border-emerald-400/30 rounded-full px-3 py-1 text-emerald-300 text-sm font-medium">
+                  <span className="bg-herbal-sage-500/20 border border-herbal-sage-400/30 rounded-full px-3 py-1 text-herbal-sage-300 text-sm font-medium">
                     {Math.round(result.confidence * 100)}%
                   </span>
                 </div>

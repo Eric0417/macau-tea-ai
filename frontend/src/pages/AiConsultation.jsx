@@ -96,7 +96,7 @@ export default function AiConsultation() {
               m.role === 'user' ? 'text-white' : 'text-white/80'
             }`}>
               {m.role === 'user' && (
-                <div className="absolute inset-0 bg-emerald-500/25 rounded-2xl pointer-events-none z-0" />
+                <div className="absolute inset-0 bg-azulejo-500/22 rounded-2xl pointer-events-none z-0" />
               )}
               <p className="whitespace-pre-wrap relative z-10">{m.content}</p>
             </div>
@@ -125,7 +125,7 @@ export default function AiConsultation() {
             className="flex-1 glass glass-thin rounded-2xl px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-white/40 transition-all relative z-10" />
           <button onClick={send} disabled={!input.trim() || loading}
             className="glass glass-thin rounded-2xl px-4 text-white disabled:opacity-30 transition-all">
-            <div className="absolute inset-0 bg-emerald-500/50 rounded-2xl pointer-events-none z-0" />
+            <div className="absolute inset-0 bg-azulejo-500/45 rounded-2xl pointer-events-none z-0" />
             <Send size={18} className="relative z-10" />
           </button>
         </div>

@@ -72,8 +72,8 @@ export default function History() {
                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -80 }}
                 transition={{ delay: i * 0.04 }}
                 className="glass glass-thin rounded-2xl p-4 flex items-center gap-3">
-                <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center relative z-10 ${r.type === 'tea' ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}>
-                  {r.type === 'tea' ? <Leaf size={18} className="text-emerald-300" /> : <Scan size={18} className="text-rose-300" />}
+                <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center relative z-10 ${r.type === 'tea' ? 'bg-herbal-sage-500/20' : 'bg-cinnabar-500/20'}`}>
+                  {r.type === 'tea' ? <Leaf size={18} className="text-herbal-sage-300" /> : <Scan size={18} className="text-cinnabar-300" />}
                 </div>
                 <button onClick={() => navigate(`/result/${r.id}`)} className="flex-1 text-left min-w-0 relative z-10">
                   <p className="text-white font-medium text-sm truncate">{r.type === 'tea' ? r.name : r.constitution}</p>

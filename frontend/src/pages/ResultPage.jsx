@@ -29,7 +29,7 @@ export default function ResultPage() {
   if (!record) return (
     <div className="text-center pt-32 px-5">
       <p className="text-white/40 mb-4">{t('result.notFound')}</p>
-      <button onClick={() => navigate('/history')} className="text-emerald-300 text-sm">{t('result.backHistory')}</button>
+      <button onClick={() => navigate('/history')} className="text-azulejo-300 text-sm">{t('result.backHistory')}</button>
     </div>
   );
 
@@ -59,10 +59,10 @@ export default function ResultPage() {
         </button>
 
         {/* Header */}
-        <div className="glass glass-card rounded-3xl p-6 mb-4">
+        <div className="glass glass-card rounded-3xl p-6 mb-4 azulejo-frame">
           <div className="flex items-center gap-3 mb-3 relative z-10">
-            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${tea ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}>
-              {tea ? <Leaf size={24} className="text-emerald-300" /> : <Scan size={24} className="text-rose-300" />}
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${tea ? 'bg-herbal-sage-500/20' : 'bg-cinnabar-500/20'}`}>
+              {tea ? <Leaf size={24} className="text-herbal-sage-300" /> : <Scan size={24} className="text-cinnabar-300" />}
             </div>
             <div>
               <h1 className="text-2xl font-bold text-white">{tea ? record.name : record.constitution}</h1>
@@ -70,7 +70,7 @@ export default function ResultPage() {
             </div>
           </div>
           {tea && record.confidence && (
-            <span className="inline-block bg-emerald-500/15 border border-emerald-400/20 rounded-full px-3 py-1 text-emerald-300 text-sm relative z-10">
+            <span className="inline-block bg-herbal-sage-500/15 border border-herbal-sage-400/20 rounded-full px-3 py-1 text-herbal-sage-300 text-sm relative z-10">
               {t('result.confidence')} {Math.round(record.confidence * 100)}%
             </span>
           )}
@@ -92,7 +92,7 @@ export default function ResultPage() {
               <p className="text-white/80 font-medium text-sm mb-3 relative z-10">{t('result.recommended')}</p>
               <div className="flex flex-wrap gap-2 relative z-10">
                 {record.teas.map(t => (
-                  <span key={t} className="bg-emerald-500/15 border border-emerald-400/20 rounded-full px-3 py-1.5 text-emerald-300 text-sm">{t}</span>
+                  <span key={t} className="bg-herbal-sage-500/15 border border-herbal-sage-400/20 rounded-full px-3 py-1.5 text-herbal-sage-300 text-sm">{t}</span>
                 ))}
               </div>
             </motion.div>

@@ -76,7 +76,7 @@ export default function TongueDiagnosis() {
               </button>
               <button onClick={analyze} disabled={loading}
                 className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2">
-                <div className="absolute inset-0 bg-rose-500/50 rounded-2xl pointer-events-none z-0" />
+                <div className="absolute inset-0 bg-cinnabar-500/45 rounded-2xl pointer-events-none z-0" />
                 {loading
                   ? <><Loader2 size={16} className="animate-spin relative z-10" /><span className="relative z-10">{t('tongue.analyzing')}</span></>
                   : <><Scan size={16} className="relative z-10" /><span className="relative z-10">{t('tongue.diagnose')}</span></>}
@@ -102,7 +102,7 @@ export default function TongueDiagnosis() {
         <AnimatePresence>
           {result && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6 space-y-3">
-              <div className="glass glass-card rounded-3xl p-6">
+              <div className="glass glass-card rounded-3xl p-6 azulejo-frame">
                 <h2 className="text-2xl font-bold text-white mb-2 relative z-10">{result.constitution}</h2>
                 <p className="text-white/60 text-sm relative z-10">{result.diagnosis}</p>
               </div>
@@ -125,7 +125,7 @@ export default function TongueDiagnosis() {
                   <p className="text-white/80 font-medium text-sm mb-3 relative z-10">{t('tongue.recommended')}</p>
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {result.teas.map(t => (
-                      <span key={t} className="bg-emerald-500/15 border border-emerald-400/20 rounded-full px-3 py-1.5 text-emerald-300 text-sm">{t}</span>
+                      <span key={t} className="bg-herbal-sage-500/15 border border-herbal-sage-400/20 rounded-full px-3 py-1.5 text-herbal-sage-300 text-sm">{t}</span>
                     ))}
                   </div>
                 </motion.div>
