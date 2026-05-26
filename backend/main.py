@@ -392,21 +392,25 @@ TEA_PROMPTS = {
     ),
     "en": (
         "You are a Macau tea expert and TCM wellness consultant. Carefully examine this tea photo, identify the tea type and provide analysis.\n\n"
+        "IMPORTANT: All text values in the JSON must be written in English only — no Chinese, Portuguese, Korean, or Japanese.\n"
         "Reply ONLY with valid JSON following this format (no other text):\n"
         '{"name":"Tea name","confidence":0.85,"properties":"Tea nature","effects":"Effects","suitable":"Suitable for","avoid":"Cautions","suggestion":"Suggestions"}'
     ),
     "pt": (
         "Você é um especialista em chá de Macau e consultor de bem-estar da MTC. Examine cuidadosamente esta foto de chá, identifique o tipo e forneça análise.\n\n"
+        "IMPORTANTE: Todos os valores de texto no JSON devem ser escritos apenas em Português — sem chinês, inglês, coreano ou japonês.\n"
         "Responda APENAS com JSON válido neste formato (sem outro texto):\n"
         '{"name":"Nome do chá","confidence":0.85,"properties":"Natureza do chá","effects":"Efeitos","suitable":"Adequado para","avoid":"Precauções","suggestion":"Sugestões"}'
     ),
     "ko": (
         "당신은 마카오 차 전문가이자 중의학 웰니스 컨설턴트입니다. 이 차 사진을 자세히 관찰하고, 차의 종류를 식별하여 분석을 제공하세요.\n\n"
+        "중요: JSON의 모든 텍스트 값은 한국어로만 작성해야 합니다 — 중국어, 영어, 포르투갈어, 일본어 사용 금지.\n"
         "다음 JSON 형식으로만 응답하세요 (다른 텍스트 없이):\n"
         '{"name":"차 이름","confidence":0.85,"properties":"차의 성질","effects":"효능","suitable":"적합한 사람","avoid":"주의사항","suggestion":"제안"}'
     ),
     "ja": (
         "あなたはマカオのお茶専門家であり、中医学ウェルネスコンサルタントです。このお茶の写真を注意深く観察し、お茶の種類を特定して分析を提供してください。\n\n"
+        "重要: JSON内のすべてのテキスト値は日本語のみで記述してください — 中国語、英語、ポルトガル語、韓国語は禁止。\n"
         "次のJSON形式のみで返信してください（他のテキストは不要）：\n"
         '{"name":"お茶の名前","confidence":0.85,"properties":"お茶の性質","effects":"効能","suitable":"適した人","avoid":"注意事項","suggestion":"提案"}'
     ),
@@ -420,21 +424,25 @@ TONGUE_PROMPTS = {
     ),
     "en": (
         "You are an experienced TCM tongue diagnosis expert. Examine this tongue photo and provide analysis.\n\n"
+        "IMPORTANT: All text values in the JSON must be in English only — no Chinese, Portuguese, Korean, or Japanese.\n"
         "Reply ONLY with valid JSON following this format:\n"
         '{"diagnosis":"Tongue description","constitution":"Constitution type","detail":"Detailed analysis","symptoms":"Common symptoms","recommendation":"Wellness advice","teas":["Tea1","Tea2","Tea3"]}'
     ),
     "pt": (
         "Você é um especialista experiente em diagnóstico de língua da MTC. Examine esta foto da língua e forneça análise.\n\n"
+        "IMPORTANTE: Todos os valores de texto no JSON devem estar apenas em Português — sem chinês, inglês, coreano ou japonês.\n"
         "Responda APENAS com JSON válido neste formato:\n"
         '{"diagnosis":"Descrição da língua","constitution":"Tipo de constituição","detail":"Análise detalhada","symptoms":"Sintomas comuns","recommendation":"Conselhos de saúde","teas":["Chá1","Chá2","Chá3"]}'
     ),
     "ko": (
         "당신은 경험이 풍부한 중의학 혀 진단 전문가입니다. 이 혀 사진을 관찰하고 분석을 제공하세요.\n\n"
+        "중요: JSON의 모든 텍스트 값은 한국어로만 작성해야 합니다 — 중국어, 영어, 포르투갈어, 일본어 사용 금지.\n"
         "다음 JSON 형식으로만 응답하세요:\n"
         '{"diagnosis":"혀 상태 설명","constitution":"체질 유형","detail":"상세 분석","symptoms":"일반적인 증상","recommendation":"건강 조언","teas":["차1","차2","차3"]}'
     ),
     "ja": (
         "あなたは経験豊富な中医学の舌診専門家です。この舌の写真を観察し、分析を提供してください。\n\n"
+        "重要: JSON内のすべてのテキスト値は日本語のみで記述してください — 中国語、英語、ポルトガル語、韓国語は禁止。\n"
         "次のJSON形式のみで返信してください：\n"
         '{"diagnosis":"舌の状態","constitution":"体質タイプ","detail":"詳細分析","symptoms":"一般的な症状","recommendation":"健康アドバイス","teas":["お茶1","お茶2","お茶3"]}'
     ),
