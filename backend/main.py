@@ -384,12 +384,84 @@ async def api_root():
 
 # ---- 茶飲辨識 ----
 
-LANG_INSTRUCT = {
-    "zh": "請用繁體中文回覆。",
-    "pt": "Por favor, responda em Português.",
-    "en": "Please respond in English.",
-    "ko": "한국어로 응답해주세요.",
-    "ja": "日本語で回答してください。",
+TEA_PROMPTS = {
+    "zh": (
+        "你是一位澳門茶飲專家和中醫養生顧問。請仔細觀察這張茶飲照片，辨識茶的種類並提供分析。\n\n"
+        "請嚴格按照以下 JSON 格式回覆（只回覆 JSON，不要加其他文字）：\n"
+        '{"name":"茶飲名稱","confidence":0.85,"properties":"茶性","effects":"功效","suitable":"適合人群","avoid":"禁忌","suggestion":"飲用建議"}'
+    ),
+    "en": (
+        "You are a Macau tea expert and TCM wellness consultant. Carefully examine this tea photo, identify the tea type and provide analysis.\n\n"
+        "Reply ONLY with valid JSON following this format (no other text):\n"
+        '{"name":"Tea name","confidence":0.85,"properties":"Tea nature","effects":"Effects","suitable":"Suitable for","avoid":"Cautions","suggestion":"Suggestions"}'
+    ),
+    "pt": (
+        "Você é um especialista em chá de Macau e consultor de bem-estar da MTC. Examine cuidadosamente esta foto de chá, identifique o tipo e forneça análise.\n\n"
+        "Responda APENAS com JSON válido neste formato (sem outro texto):\n"
+        '{"name":"Nome do chá","confidence":0.85,"properties":"Natureza do chá","effects":"Efeitos","suitable":"Adequado para","avoid":"Precauções","suggestion":"Sugestões"}'
+    ),
+    "ko": (
+        "당신은 마카오 차 전문가이자 중의학 웰니스 컨설턴트입니다. 이 차 사진을 자세히 관찰하고, 차의 종류를 식별하여 분석을 제공하세요.\n\n"
+        "다음 JSON 형식으로만 응답하세요 (다른 텍스트 없이):\n"
+        '{"name":"차 이름","confidence":0.85,"properties":"차의 성질","effects":"효능","suitable":"적합한 사람","avoid":"주의사항","suggestion":"제안"}'
+    ),
+    "ja": (
+        "あなたはマカオのお茶専門家であり、中医学ウェルネスコンサルタントです。このお茶の写真を注意深く観察し、お茶の種類を特定して分析を提供してください。\n\n"
+        "次のJSON形式のみで返信してください（他のテキストは不要）：\n"
+        '{"name":"お茶の名前","confidence":0.85,"properties":"お茶の性質","effects":"効能","suitable":"適した人","avoid":"注意事項","suggestion":"提案"}'
+    ),
+}
+
+TONGUE_PROMPTS = {
+    "zh": (
+        "你是一位經驗豐富的中醫舌診專家。請觀察這張舌頭照片，進行舌診分析。\n\n"
+        "請嚴格按照以下 JSON 格式回覆（只回覆 JSON）：\n"
+        '{"diagnosis":"舌象描述","constitution":"體質判斷","detail":"詳細分析","symptoms":"常見症狀","recommendation":"調理建議","teas":["茶1","茶2","茶3"]}'
+    ),
+    "en": (
+        "You are an experienced TCM tongue diagnosis expert. Examine this tongue photo and provide analysis.\n\n"
+        "Reply ONLY with valid JSON following this format:\n"
+        '{"diagnosis":"Tongue description","constitution":"Constitution type","detail":"Detailed analysis","symptoms":"Common symptoms","recommendation":"Wellness advice","teas":["Tea1","Tea2","Tea3"]}'
+    ),
+    "pt": (
+        "Você é um especialista experiente em diagnóstico de língua da MTC. Examine esta foto da língua e forneça análise.\n\n"
+        "Responda APENAS com JSON válido neste formato:\n"
+        '{"diagnosis":"Descrição da língua","constitution":"Tipo de constituição","detail":"Análise detalhada","symptoms":"Sintomas comuns","recommendation":"Conselhos de saúde","teas":["Chá1","Chá2","Chá3"]}'
+    ),
+    "ko": (
+        "당신은 경험이 풍부한 중의학 혀 진단 전문가입니다. 이 혀 사진을 관찰하고 분석을 제공하세요.\n\n"
+        "다음 JSON 형식으로만 응답하세요:\n"
+        '{"diagnosis":"혀 상태 설명","constitution":"체질 유형","detail":"상세 분석","symptoms":"일반적인 증상","recommendation":"건강 조언","teas":["차1","차2","차3"]}'
+    ),
+    "ja": (
+        "あなたは経験豊富な中医学の舌診専門家です。この舌の写真を観察し、分析を提供してください。\n\n"
+        "次のJSON形式のみで返信してください：\n"
+        '{"diagnosis":"舌の状態","constitution":"体質タイプ","detail":"詳細分析","symptoms":"一般的な症状","recommendation":"健康アドバイス","teas":["お茶1","お茶2","お茶3"]}'
+    ),
+}
+
+CHAT_SYSTEM = {
+    "zh": "你是「茶博士」，一位結合中醫養生的澳門茶飲顧問。你精通茶飲性味歸經、功效，也了解中醫體質辨識和養生保健。請用繁體中文、親切友善的語氣回答。必要時提醒用戶就醫，不替代專業醫療建議。\n\n",
+    "en": "You are 'Tea Doctor', a Macau tea consultant with TCM wellness knowledge. You are an expert in tea properties, effects, and TCM constitution diagnosis and health preservation. Respond in English with a warm, friendly tone. Remind users to see a doctor when necessary — do not replace professional medical advice.\n\n",
+    "pt": "Você é o 'Doutor do Chá', um consultor de chá de Macau com conhecimentos de bem-estar da MTC. Você é especialista em propriedades do chá, efeitos e diagnóstico de constituição da MTC. Responda em Português com um tom caloroso e amigável. Lembre os usuários de consultar um médico quando necessário — não substitua aconselhamento médico profissional.\n\n",
+    "ko": "당신은 '차 박사'입니다. 중의학 웰니스 지식을 갖춘 마카오 차 컨설턴트입니다. 차의 성질, 효능 및 중의학 체질 진단과 건강 관리에 전문가입니다. 한국어로 따뜻하고 친근한 어조로 응답하세요. 필요시 의사를 만나도록 안내하세요 — 전문 의학적 조언을 대체하지 마십시오.\n\n",
+    "ja": "あなたは「茶博士」です。中医学のウェルネス知識を持つマカオのお茶コンサルタントです。お茶の性質、効能、中医学の体質診断と健康管理に精通しています。日本語で親しみやすい口調で答えてください。必要に応じて医師に相談するよう促してください — 専門的な医学的アドバイスに代わるものではありません。\n\n",
+}
+
+CHAT_USER_PREFIX = {
+    "zh": "用戶問題：",
+    "en": "User's question: ",
+    "pt": "Pergunta do utilizador: ",
+    "ko": "사용자 질문: ",
+    "ja": "ユーザーの質問：",
+}
+
+FALLBACK_CHAT = {
+    "zh": "抱歉，我暫時無法回應。請稍後再試 🍵",
+    "pt": "Desculpe, não consigo responder agora. Tente novamente mais tarde 🍵",
+    "en": "Sorry, I can't respond right now. Please try again later 🍵",
+    "ko": "죄송합니다. 지금은 응답할 수 없습니다. 나중에 다시 시도해주세요 🍵",
+    "ja": "申し訳ございません。現在応答できません。後でもう一度お試しください 🍵",
 }
 
 MOCK_TEAS_BY_LANG = {
@@ -413,15 +485,7 @@ MOCK_TONGUES_BY_LANG = {
 async def tea_recognize(file: UploadFile = File(...), user_id: str = Form("anonymous"), language: str = Form("zh")):
     fname, b64 = await save_upload(file)
 
-    lang_instr = LANG_INSTRUCT.get(language, LANG_INSTRUCT["zh"])
-
-    prompt = (
-        "你是一位澳門茶飲專家和中醫養生顧問。請仔細觀察這張茶飲照片，辨識茶的種類並提供分析。\n\n"
-        f"{lang_instr}\n\n"
-        "請嚴格按照以下 JSON 格式回覆（只回覆 JSON，不要加其他文字）：\n"
-        '{"name":"茶飲名稱","confidence":0.85,"properties":"茶性","effects":"功效","suitable":"適合人群","avoid":"禁忌","suggestion":"飲用建議"}'
-    )
-
+    prompt = TEA_PROMPTS.get(language, TEA_PROMPTS["zh"])
     mock_list = MOCK_TEAS_BY_LANG.get(language, MOCK_TEAS)
 
     raw = await query_ai(prompt, image_base64=b64)
@@ -452,14 +516,7 @@ async def tea_recognize(file: UploadFile = File(...), user_id: str = Form("anony
 async def tongue_diagnose(file: UploadFile = File(...), user_id: str = Form("anonymous"), language: str = Form("zh")):
     fname, b64 = await save_upload(file)
 
-    lang_instr = LANG_INSTRUCT.get(language, LANG_INSTRUCT["zh"])
-
-    prompt = (
-        "你是一位經驗豐富的中醫舌診專家。請觀察這張舌頭照片，進行舌診分析。\n\n"
-        f"{lang_instr}\n\n"
-        "請嚴格按照以下 JSON 格式回覆（只回覆 JSON）：\n"
-        '{"diagnosis":"舌象描述","constitution":"體質判斷","detail":"詳細分析","symptoms":"常見症狀","recommendation":"調理建議","teas":["茶1","茶2","茶3"]}'
-    )
+    prompt = TONGUE_PROMPTS.get(language, TONGUE_PROMPTS["zh"])
 
     raw = await query_ai(prompt, image_base64=b64)
     ai = parse_json_from_ai(raw) if raw else None
@@ -490,29 +547,14 @@ async def chat(message: str = Form(...), user_id: str = Form("anonymous"), langu
     await db_chat_save(user_id, "user", message)
     history = await db_chat_list(user_id, limit=20)
 
-    lang_instr = LANG_INSTRUCT.get(language, LANG_INSTRUCT["zh"])
-
-    system = (
-        "你是「茶博士」，一位結合中醫養生的澳門茶飲顧問。你精通茶飲性味歸經、功效，"
-        "也了解中醫體質辨識和養生保健。"
-        f"{lang_instr}用親切友善的語氣回答。"
-        "必要時提醒用戶就醫，不替代專業醫療建議。\n\n"
-    )
-
-    lang_map = {"zh": "中文", "pt": "葡萄牙文", "en": "英文", "ko": "韓文", "ja": "日文"}
-    user_lang = lang_map.get(language, "中文")
-    full = system + f"用戶問題（請用{user_lang}回覆）：" + message
+    system = CHAT_SYSTEM.get(language, CHAT_SYSTEM["zh"])
+    prefix = CHAT_USER_PREFIX.get(language, CHAT_USER_PREFIX["zh"])
+    full = system + prefix + message
 
     reply = await query_ai(full, history=history)
     if not reply:
-        fallback = {
-            "zh": "抱歉，我暫時無法回應。請稍後再試 🍵",
-            "pt": "Desculpe, não consigo responder agora. Tente novamente mais tarde 🍵",
-            "en": "Sorry, I can't respond right now. Please try again later 🍵",
-            "ko": "죄송합니다. 지금은 응답할 수 없습니다. 나중에 다시 시도해주세요 🍵",
-            "ja": "申し訳ございません。現在応答できません。後でもう一度お試しください 🍵",
-        }
-        reply = fallback.get(language, fallback["zh"])
+        fallback = FALLBACK_CHAT.get(language, FALLBACK_CHAT["zh"])
+        reply = fallback
 
     await db_chat_save(user_id, "assistant", reply)
     return {"reply": reply}
