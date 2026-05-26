@@ -315,6 +315,11 @@ MOCK_TONGUES = [
 # API 路由
 # ============================================================
 
+@app.get("/call")
+async def call():
+    return "ok"
+
+
 @app.get("/api")
 async def api_root():
     return {"message": "澳門茶飲 AI 辨識系統 API", "version": "2.0.0",
