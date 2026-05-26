@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "home": "首页",
+    "tea": "茶饮",
+    "tongue": "舌诊",
+    "chat": "问诊",
+    "history": "历史"
+  },
+  "home": {
+    "badge": "AI 智能养生助手",
+    "title": "澳门茶饮 AI",
+    "subtitle1": "结合中医智慧与人工智能",
+    "subtitle2": "为您推荐最适合的茶饮",
+    "features": {
+      "tea": { "title": "茶饮识别", "desc": "AI 智能识别茶饮种类与功效" },
+      "tongue": { "title": "舌象分析", "desc": "AI 舌诊体质辨识与茶饮建议" },
+      "chat": { "title": "AI 问诊", "desc": "与茶博士对话，咨询养生建议" },
+      "history": { "title": "历史记录", "desc": "查看过去的识别与问诊记录" }
+    }
+  },
+  "tea": {
+    "title": "茶饮识别",
+    "subtitle": "拍照或上传茶饮照片",
+    "upload": "点击上传茶饮照片",
+    "format": "支持 JPG、PNG 格式",
+    "retry": "重新选择",
+    "analyze": "AI 分析",
+    "analyzing": "分析中...",
+    "error": "分析失败，请重试",
+    "effects": "功效",
+    "suitable": "适合人群",
+    "caution": "注意事项",
+    "suggestion": "饮用建议"
+  },
+  "tongue": {
+    "title": "舌象分析",
+    "subtitle": "拍摄舌头照片进行 AI 分析",
+    "upload": "点击上传舌头照片",
+    "tip": "伸出舌头，自然光下拍摄效果最佳",
+    "retry": "重新选择",
+    "diagnose": "AI 舌诊",
+    "analyzing": "分析中...",
+    "error": "分析失败，请重试",
+    "analysis": "详细分析",
+    "symptoms": "常见症状",
+    "advice": "调理建议",
+    "recommended": "🍵 推荐茶饮"
+  },
+  "chat": {
+    "title": "AI 茶博士",
+    "subtitle": "您的养生茶饮顾问",
+    "empty": "向茶博士提问任何茶饮和养生问题",
+    "q1": "我容易上火，喝什么茶好？",
+    "q2": "普洱茶有什么功效？",
+    "q3": "晚上适合喝什么茶？",
+    "q4": "手脚冰冷怎么调理？",
+    "placeholder": "输入您的问题…",
+    "error": "抱歉，发生了错误 😞"
+  },
+  "result": {
+    "notFound": "找不到记录",
+    "backHistory": "返回历史记录",
+    "back": "返回",
+    "confidence": "识别信心度",
+    "nature": "茶性",
+    "effects": "功效",
+    "suitable": "适合人群",
+    "caution": "注意事项",
+    "suggestion": "饮用建议",
+    "diagnosis": "舌象",
+    "analysis": "详细分析",
+    "symptoms": "常见症状",
+    "advice": "调理建议",
+    "recommended": "🍵 推荐茶饮"
+  },
+  "history": {
+    "title": "历史记录",
+    "clearAll": "清空全部",
+    "empty": "还没有任何记录"
+  }
+}

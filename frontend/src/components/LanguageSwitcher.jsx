@@ -3,7 +3,8 @@ import { Globe } from 'lucide-react';
 import { useState } from 'react';
 
 const LANGUAGES = [
-  { code: 'zh', label: '中文' },
+  { code: 'zh', label: '繁體中文' },
+  { code: 'zh-CN', label: '简体中文' },
   { code: 'pt', label: 'Português' },
   { code: 'en', label: 'English' },
   { code: 'ko', label: '한국어' },

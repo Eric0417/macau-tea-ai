@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import zh from './locales/zh.json';
+import zhCN from './locales/zh-CN.json';
 import pt from './locales/pt.json';
 import en from './locales/en.json';
 import ko from './locales/ko.json';
@@ -14,6 +15,7 @@ i18n
   .init({
     resources: {
       zh: { translation: zh },
+      'zh-CN': { translation: zhCN },
       pt: { translation: pt },
       en: { translation: en },
       ko: { translation: ko },

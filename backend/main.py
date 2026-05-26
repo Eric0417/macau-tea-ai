@@ -457,6 +457,7 @@ TONGUE_PROMPTS = {
 
 CHAT_SYSTEM = {
     "zh": "你是「茶博士」，一位結合中醫養生的澳門茶飲顧問。你精通茶飲性味歸經、功效，也了解中醫體質辨識和養生保健。請用繁體中文、親切友善的語氣回答。必要時提醒用戶就醫，不替代專業醫療建議。\n\n",
+    "zh-CN": "你是「茶博士」，一位结合中医养生的澳门茶饮顾问。你精通茶饮性味归经、功效，也了解中医体质辨识和养生保健。请用简体中文、亲切友善的语气回答。必要时提醒用户就医，不替代专业医疗建议。\n\n",
     "en": "You are 'Tea Doctor', a Macau tea consultant with TCM wellness knowledge. You are an expert in tea properties, effects, and TCM constitution diagnosis and health preservation. Respond in English with a warm, friendly tone. Remind users to see a doctor when necessary — do not replace professional medical advice.\n\n",
     "pt": "Você é o 'Doutor do Chá', um consultor de chá de Macau com conhecimentos de bem-estar da MTC. Você é especialista em propriedades do chá, efeitos e diagnóstico de constituição da MTC. Responda em Português com um tom caloroso e amigável. Lembre os usuários de consultar um médico quando necessário — não substitua aconselhamento médico profissional.\n\n",
     "ko": "당신은 '차 박사'입니다. 중의학 웰니스 지식을 갖춘 마카오 차 컨설턴트입니다. 차의 성질, 효능 및 중의학 체질 진단과 건강 관리에 전문가입니다. 한국어로 따뜻하고 친근한 어조로 응답하세요. 필요시 의사를 만나도록 안내하세요 — 전문 의학적 조언을 대체하지 마십시오.\n\n",
@@ -465,6 +466,7 @@ CHAT_SYSTEM = {
 
 CHAT_USER_PREFIX = {
     "zh": "用戶問題：",
+    "zh-CN": "用户问题：",
     "en": "User's question: ",
     "pt": "Pergunta do utilizador: ",
     "ko": "사용자 질문: ",
@@ -473,6 +475,7 @@ CHAT_USER_PREFIX = {
 
 FALLBACK_CHAT = {
     "zh": "抱歉，我暫時無法回應。請稍後再試 🍵",
+    "zh-CN": "抱歉，我暂时无法回应。请稍后再试 🍵",
     "pt": "Desculpe, não consigo responder agora. Tente novamente mais tarde 🍵",
     "en": "Sorry, I can't respond right now. Please try again later 🍵",
     "ko": "죄송합니다. 지금은 응답할 수 없습니다. 나중에 다시 시도해주세요 🍵",
@@ -499,16 +502,17 @@ MOCK_TONGUES_BY_LANG = {
 @app.post("/api/tea/recognize")
 async def tea_recognize(file: UploadFile = File(...), user_id: str = Form("anonymous"), language: str = Form("zh")):
     fname, b64 = await save_upload(file)
+    lang = 'zh' if language == 'zh-CN' else language
 
-    prompt = TEA_PROMPTS.get(language, TEA_PROMPTS["zh"])
-    mock_list = MOCK_TEAS_BY_LANG.get(language, MOCK_TEAS)
+    prompt = TEA_PROMPTS.get(lang, TEA_PROMPTS["zh"])
+    mock_list = MOCK_TEAS_BY_LANG.get(lang, MOCK_TEAS)
 
     raw = await query_ai(prompt, image_base64=b64)
     ai = parse_json_from_ai(raw) if raw else None
     if not ai:
         ai = random.choice(mock_list)
-    elif language != "zh" and any(contains_chinese(str(v)) for v in ai.values() if isinstance(v, str)):
-        print(f"⚠️ AI returned Chinese for language={language}, using mock data instead")
+    elif lang != "zh" and any(contains_chinese(str(v)) for v in ai.values() if isinstance(v, str)):
+        print(f"⚠️ AI returned Chinese for language={lang}, using mock data instead")
         ai = random.choice(mock_list)
 
     record = {
@@ -533,16 +537,17 @@ async def tea_recognize(file: UploadFile = File(...), user_id: str = Form("anony
 @app.post("/api/tongue/diagnose")
 async def tongue_diagnose(file: UploadFile = File(...), user_id: str = Form("anonymous"), language: str = Form("zh")):
     fname, b64 = await save_upload(file)
+    lang = 'zh' if language == 'zh-CN' else language
 
-    prompt = TONGUE_PROMPTS.get(language, TONGUE_PROMPTS["zh"])
+    prompt = TONGUE_PROMPTS.get(lang, TONGUE_PROMPTS["zh"])
 
     raw = await query_ai(prompt, image_base64=b64)
     ai = parse_json_from_ai(raw) if raw else None
-    mock_list = MOCK_TONGUES_BY_LANG.get(language, MOCK_TONGUES)
+    mock_list = MOCK_TONGUES_BY_LANG.get(lang, MOCK_TONGUES)
     if not ai:
         ai = random.choice(mock_list)
-    elif language != "zh" and any(contains_chinese(str(v)) for v in ai.values() if isinstance(v, str)):
-        print(f"⚠️ AI returned Chinese for language={language}, using mock data instead")
+    elif lang != "zh" and any(contains_chinese(str(v)) for v in ai.values() if isinstance(v, str)):
+        print(f"⚠️ AI returned Chinese for language={lang}, using mock data instead")
         ai = random.choice(mock_list)
 
     record = {
@@ -567,9 +572,10 @@ async def tongue_diagnose(file: UploadFile = File(...), user_id: str = Form("ano
 async def chat(message: str = Form(...), user_id: str = Form("anonymous"), language: str = Form("zh")):
     await db_chat_save(user_id, "user", message)
     history = await db_chat_list(user_id, limit=20)
+    lang = 'zh-CN' if language == 'zh-CN' else language
 
-    system = CHAT_SYSTEM.get(language, CHAT_SYSTEM["zh"])
-    prefix = CHAT_USER_PREFIX.get(language, CHAT_USER_PREFIX["zh"])
+    system = CHAT_SYSTEM.get(lang, CHAT_SYSTEM["zh"])
+    prefix = CHAT_USER_PREFIX.get(lang, CHAT_USER_PREFIX["zh"])
     full = system + prefix + message
 
     reply = await query_ai(full, history=history)
