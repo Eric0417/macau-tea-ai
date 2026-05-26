@@ -7,7 +7,7 @@ import { getUserId } from '../utils/userId';
 
 export default function AiConsultation() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const userId = getUserId();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -34,6 +34,7 @@ export default function AiConsultation() {
       const fd = new FormData();
       fd.append('message', text);
       fd.append('user_id', userId);
+      fd.append('language', i18n.language);
       const r = await fetch('/api/chat', { method: 'POST', body: fd });
       const d = await r.json();
       setMessages(p => [...p, { role: 'assistant', content: d.reply }]);

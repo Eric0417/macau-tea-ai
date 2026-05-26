@@ -7,7 +7,7 @@ import { getUserId } from '../utils/userId';
 
 export default function TeaRecognition() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const fileRef = useRef(null);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -28,6 +28,7 @@ export default function TeaRecognition() {
       const fd = new FormData();
       fd.append('file', image);
       fd.append('user_id', getUserId());
+      fd.append('language', i18n.language);
       const res = await fetch('/api/tea/recognize', { method: 'POST', body: fd });
       const data = await res.json();
       data.error ? setError(data.error) : setResult(data);
