@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 const LANGUAGES = ['zh', 'zh-CN', 'pt', 'en', 'ko', 'ja'];
 
-/* 每個語言的本地化名稱（以各語言顯示） */
 const LABELS = {
   zh:    { zh: '繁體中文', 'zh-CN': '繁体中文', pt: 'Chinês Tradicional', en: 'Traditional Chinese', ko: '번체 중국어', ja: '繁体中国語' },
   'zh-CN': { zh: '簡體中文', 'zh-CN': '简体中文', pt: 'Chinês Simplificado', en: 'Simplified Chinese', ko: '간체 중국어', ja: '簡体中国語' },
@@ -30,7 +29,7 @@ export default function LanguageSwitcher() {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="glass glass-thin rounded-full px-3 py-1.5 flex items-center gap-1.5 text-white/70 hover:text-white transition-colors text-xs"
+        className="glass-btn glass-btn-cream glass-btn-sm rounded-full px-3 py-1.5 text-azulejo-600"
       >
         <Globe size={14} className="relative z-10" />
         <span className="relative z-10">{currentLabel}</span>
@@ -38,21 +37,19 @@ export default function LanguageSwitcher() {
 
       {open && (
         <>
-          {/* 毛玻璃遮罩層 — 加深背景分離感 */}
           <div
-            className="fixed inset-0 z-40 bg-black/25 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-black/20"
             onClick={() => setOpen(false)}
           />
-          {/* 加厚毛玻璃下拉 — 更不透更清晰 */}
-          <div className="absolute right-0 top-full mt-2 z-50 glass-thick rounded-2xl p-1.5 min-w-[150px] shadow-xl border-white/20">
+          <div className="absolute right-0 top-full mt-2 z-50 glass-thick rounded-2xl p-1.5 min-w-[150px] shadow-xl border border-azulejo-200 bg-white">
             {LANGUAGES.map(code => (
               <button
                 key={code}
                 onClick={() => selectLang(code)}
                 className={`block w-full text-left rounded-xl px-3 py-2 text-sm transition-colors relative z-10 ${
                   code === current
-                    ? 'text-white bg-white/12'
-                    : 'text-white/60 hover:text-white hover:bg-white/8'
+                    ? 'text-azulejo-900 bg-azulejo-50'
+                    : 'text-azulejo-600 hover:text-azulejo-900 hover:bg-azulejo-50/50'
                 }`}
               >
                 {LABELS[code]?.[current] || code}

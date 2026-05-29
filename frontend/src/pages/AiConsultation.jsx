@@ -56,17 +56,17 @@ export default function AiConsultation() {
       <div className="shrink-0 px-5 pt-12 pb-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button onClick={() => navigate('/')}
-            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-white/70 hover:text-white">
+            className="glass-btn glass-btn-ghost rounded-2xl p-2.5">
             <ArrowLeft size={20} />
           </button>
           <div>
-            <h1 className="text-xl font-bold text-white">{t('chat.title')}</h1>
-            <p className="text-white/40 text-xs">{t('chat.subtitle')}</p>
+            <h1 className="text-xl font-bold text-azulejo-900">{t('chat.title')}</h1>
+            <p className="text-azulejo-500 text-xs">{t('chat.subtitle')}</p>
           </div>
         </div>
         {messages.length > 0 && (
           <button onClick={clear}
-            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-white/40 hover:text-red-300">
+            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-azulejo-400 hover:text-cinnabar-500">
             <Trash2 size={18} />
           </button>
         )}
@@ -77,11 +77,11 @@ export default function AiConsultation() {
         {messages.length === 0 && !loading && (
           <div className="text-center pt-20">
             <p className="text-5xl mb-4">🍵</p>
-            <p className="text-white/40 text-sm mb-6">{t('chat.empty')}</p>
+            <p className="text-azulejo-500 text-sm mb-6">{t('chat.empty')}</p>
             <div className="flex flex-wrap justify-center gap-2">
               {quickQs.map(q => (
                 <button key={q} onClick={() => setInput(q)}
-                  className="glass-btn glass-btn-cream glass-btn-sm rounded-2xl px-3 py-2 text-white/50 text-xs">
+                  className="glass-btn glass-btn-cream glass-btn-sm rounded-2xl px-3 py-2 text-azulejo-600 text-xs">
                   {q}
                 </button>
               ))}
@@ -103,9 +103,9 @@ export default function AiConsultation() {
         {loading && (
           <div className="flex justify-start">
             <div className="glass-bubble glass-bubble-ai flex gap-1.5">
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" />
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />
+              <span className="w-2 h-2 bg-azulejo-400 rounded-full animate-bounce" />
+              <span className="w-2 h-2 bg-azulejo-400 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
+              <span className="w-2 h-2 bg-azulejo-400 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />
             </div>
           </div>
         )}
@@ -119,7 +119,7 @@ export default function AiConsultation() {
           <input value={input} onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
             placeholder={t('chat.placeholder')}
-            className="flex-1 glass glass-thin rounded-2xl px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-azulejo-400/40 transition-all relative z-10" />
+            className="flex-1 glass-input rounded-2xl px-4 py-3 text-sm" />
           <button onClick={send} disabled={!input.trim() || loading}
             className="glass-btn glass-btn-azulejo rounded-2xl px-4 disabled:opacity-30">
             <Send size={18} />

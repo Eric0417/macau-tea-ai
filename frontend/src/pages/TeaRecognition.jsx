@@ -52,30 +52,30 @@ export default function TeaRecognition() {
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <button onClick={() => navigate('/')}
-            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-white/70 hover:text-white">
+            className="glass-btn glass-btn-ghost rounded-2xl p-2.5">
             <ArrowLeft size={20} />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-white">{t('tea.title')}</h1>
-            <p className="text-white/50 text-sm">{t('tea.subtitle')}</p>
+            <h1 className="text-2xl font-bold text-azulejo-900">{t('tea.title')}</h1>
+            <p className="text-azulejo-500 text-sm">{t('tea.subtitle')}</p>
           </div>
         </div>
 
         {/* Upload / Preview */}
         {!preview ? (
           <div onClick={() => fileRef.current?.click()}
-            className="glass azulejo-marble rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-white/20 hover:border-white/30 transition-all">
-            <div className="bg-white/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
-              <Camera size={28} className="text-white/60" />
+            className="glass rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-azulejo-200 hover:border-azulejo-300 transition-all bg-white/70">
+            <div className="bg-azulejo-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
+              <Camera size={28} className="text-azulejo-400" />
             </div>
-            <p className="text-white/60 mb-2 relative z-10">{t('tea.upload')}</p>
-            <p className="text-white/30 text-sm relative z-10">{t('tea.format')}</p>
+            <p className="text-azulejo-700 mb-2 relative z-10">{t('tea.upload')}</p>
+            <p className="text-azulejo-400 text-sm relative z-10">{t('tea.format')}</p>
           </div>
         ) : (
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-            className="relative rounded-3xl overflow-hidden border border-white/20">
+            className="relative rounded-3xl overflow-hidden border border-azulejo-200 bg-white">
             <img src={preview} alt="" className="w-full aspect-square object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex gap-3 z-10">
               <button onClick={reset}
                 className="glass-btn glass-btn-cream flex-1 rounded-2xl py-3 text-sm font-medium">
@@ -97,9 +97,8 @@ export default function TeaRecognition() {
         <AnimatePresence>
           {error && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="mt-4 glass glass-thin rounded-2xl p-4">
-              <div className="absolute inset-0 bg-red-500/20 rounded-2xl pointer-events-none z-0" />
-              <p className="text-red-200 text-sm relative z-10">{error}</p>
+              className="mt-4 glass rounded-2xl p-4 bg-red-50 border-red-200">
+              <p className="text-red-700 text-sm relative z-10">{error}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -108,20 +107,20 @@ export default function TeaRecognition() {
         <AnimatePresence>
           {result && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6 space-y-3">
-              <div className="glass glass-card azulejo-marble rounded-3xl p-6 azulejo-frame">
+              <div className="glass glass-card rounded-3xl p-6 azulejo-frame bg-white">
                 <div className="flex items-center justify-between mb-3 relative z-10">
-                  <h2 className="text-2xl font-bold text-white">{result.name}</h2>
-                  <span className="bg-herbal-sage-500/20 border border-herbal-sage-400/30 rounded-full px-3 py-1 text-herbal-sage-300 text-sm font-medium">
+                  <h2 className="text-2xl font-bold text-azulejo-900">{result.name}</h2>
+                  <span className="bg-azulejo-50 border border-azulejo-200 rounded-full px-3 py-1 text-azulejo-700 text-sm font-medium">
                     {Math.round(result.confidence * 100)}%
                   </span>
                 </div>
-                <p className="text-white/60 text-sm relative z-10">{result.properties}</p>
+                <p className="text-azulejo-600 text-sm relative z-10">{result.properties}</p>
               </div>
               {details.map((d, i) => (
                 <motion.div key={d.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }}
-                  className="glass glass-thin rounded-2xl p-4">
-                  <p className="text-white/80 font-medium text-sm mb-1 relative z-10">{d.emoji} {d.label}</p>
-                  <p className="text-white/55 text-sm leading-relaxed relative z-10">{d.value}</p>
+                  className="glass glass-thin rounded-2xl p-4 bg-white/70">
+                  <p className="text-azulejo-800 font-medium text-sm mb-1 relative z-10">{d.emoji} {d.label}</p>
+                  <p className="text-azulejo-600 text-sm leading-relaxed relative z-10">{d.value}</p>
                 </motion.div>
               ))}
             </motion.div>

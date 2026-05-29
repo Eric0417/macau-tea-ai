@@ -24,12 +24,12 @@ export default function ResultPage() {
   }, [id]);
 
   if (loading) return (
-    <div className="flex justify-center pt-40"><div className="w-8 h-8 border-2 border-white/20 border-t-white/60 rounded-full animate-spin" /></div>
+    <div className="flex justify-center pt-40"><div className="w-8 h-8 border-2 border-azulejo-200 border-t-azulejo-500 rounded-full animate-spin" /></div>
   );
   if (!record) return (
     <div className="text-center pt-32 px-5">
-      <p className="text-white/40 mb-4">{t('result.notFound')}</p>
-      <button onClick={() => navigate('/history')} className="text-azulejo-300 text-sm">{t('result.backHistory')}</button>
+      <p className="text-azulejo-500 mb-4">{t('result.notFound')}</p>
+      <button onClick={() => navigate('/history')} className="text-azulejo-600 text-sm">{t('result.backHistory')}</button>
     </div>
   );
 
@@ -59,18 +59,18 @@ export default function ResultPage() {
         </button>
 
         {/* Header */}
-        <div className="glass glass-card azulejo-marble rounded-3xl p-6 mb-4 azulejo-frame">
+        <div className="glass glass-card rounded-3xl p-6 mb-4 azulejo-frame bg-white">
           <div className="flex items-center gap-3 mb-3 relative z-10">
-            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${tea ? 'bg-herbal-sage-500/20' : 'bg-cinnabar-500/20'}`}>
-              {tea ? <Leaf size={24} className="text-herbal-sage-300" /> : <Scan size={24} className="text-cinnabar-300" />}
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${tea ? 'bg-azulejo-50' : 'bg-cinnabar-50'}`}>
+              {tea ? <Leaf size={24} className="text-azulejo-600" /> : <Scan size={24} className="text-cinnabar-500" />}
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white">{tea ? record.name : record.constitution}</h1>
-              <p className="text-white/40 text-xs">{new Date(record.created_at).toLocaleString()}</p>
+              <h1 className="text-2xl font-bold text-azulejo-900">{tea ? record.name : record.constitution}</h1>
+              <p className="text-azulejo-400 text-xs">{new Date(record.created_at).toLocaleString()}</p>
             </div>
           </div>
           {tea && record.confidence && (
-            <span className="inline-block bg-herbal-sage-500/15 border border-herbal-sage-400/20 rounded-full px-3 py-1 text-herbal-sage-300 text-sm relative z-10">
+            <span className="inline-block bg-azulejo-50 border border-azulejo-200 rounded-full px-3 py-1 text-azulejo-700 text-sm relative z-10">
               {t('result.confidence')} {Math.round(record.confidence * 100)}%
             </span>
           )}
@@ -80,19 +80,19 @@ export default function ResultPage() {
         <div className="space-y-3">
           {items.map((d, i) => (
             <motion.div key={d.l} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }}
-              className="glass glass-thin rounded-2xl p-4">
-              <p className="text-white/80 font-medium text-sm mb-1 relative z-10">{d.e} {d.l}</p>
-              <p className="text-white/55 text-sm leading-relaxed relative z-10">{d.v}</p>
+              className="glass glass-thin rounded-2xl p-4 bg-white/70">
+              <p className="text-azulejo-800 font-medium text-sm mb-1 relative z-10">{d.e} {d.l}</p>
+              <p className="text-azulejo-600 text-sm leading-relaxed relative z-10">{d.v}</p>
             </motion.div>
           ))}
 
           {!tea && record.teas?.length > 0 && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-              className="glass glass-thin rounded-2xl p-4">
-              <p className="text-white/80 font-medium text-sm mb-3 relative z-10">{t('result.recommended')}</p>
+              className="glass glass-thin rounded-2xl p-4 bg-white/70">
+              <p className="text-azulejo-800 font-medium text-sm mb-3 relative z-10">{t('result.recommended')}</p>
               <div className="flex flex-wrap gap-2 relative z-10">
                 {record.teas.map(t => (
-                  <span key={t} className="bg-herbal-sage-500/15 border border-herbal-sage-400/20 rounded-full px-3 py-1.5 text-herbal-sage-300 text-sm">{t}</span>
+                  <span key={t} className="bg-azulejo-50 border border-azulejo-200 rounded-full px-3 py-1.5 text-azulejo-700 text-sm">{t}</span>
                 ))}
               </div>
             </motion.div>

@@ -45,30 +45,30 @@ export default function TongueDiagnosis() {
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <button onClick={() => navigate('/')}
-            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-white/70 hover:text-white">
+            className="glass-btn glass-btn-ghost rounded-2xl p-2.5">
             <ArrowLeft size={20} />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-white">{t('tongue.title')}</h1>
-            <p className="text-white/50 text-sm">{t('tongue.subtitle')}</p>
+            <h1 className="text-2xl font-bold text-azulejo-900">{t('tongue.title')}</h1>
+            <p className="text-azulejo-500 text-sm">{t('tongue.subtitle')}</p>
           </div>
         </div>
 
         {/* Upload / Preview */}
         {!preview ? (
           <div onClick={() => fileRef.current?.click()}
-            className="glass azulejo-baroque rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-white/20 hover:border-white/30 transition-all">
-            <div className="bg-white/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
-              <Camera size={28} className="text-white/60" />
+            className="glass rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-azulejo-200 hover:border-azulejo-300 transition-all bg-white/70">
+            <div className="bg-azulejo-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
+              <Camera size={28} className="text-azulejo-400" />
             </div>
-            <p className="text-white/60 mb-2 relative z-10">{t('tongue.upload')}</p>
-            <p className="text-white/30 text-sm relative z-10">{t('tongue.tip')}</p>
+            <p className="text-azulejo-700 mb-2 relative z-10">{t('tongue.upload')}</p>
+            <p className="text-azulejo-400 text-sm relative z-10">{t('tongue.tip')}</p>
           </div>
         ) : (
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-            className="relative rounded-3xl overflow-hidden border border-white/20">
+            className="relative rounded-3xl overflow-hidden border border-azulejo-200 bg-white">
             <img src={preview} alt="" className="w-full aspect-square object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex gap-3 z-10">
               <button onClick={reset}
                 className="glass-btn glass-btn-cream flex-1 rounded-2xl py-3 text-sm font-medium">
@@ -90,9 +90,8 @@ export default function TongueDiagnosis() {
         <AnimatePresence>
           {error && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="mt-4 glass glass-thin rounded-2xl p-4">
-              <div className="absolute inset-0 bg-red-500/20 rounded-2xl pointer-events-none z-0" />
-              <p className="text-red-200 text-sm relative z-10">{error}</p>
+              className="mt-4 glass rounded-2xl p-4 bg-red-50 border-red-200">
+              <p className="text-red-700 text-sm relative z-10">{error}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -101,9 +100,9 @@ export default function TongueDiagnosis() {
         <AnimatePresence>
           {result && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6 space-y-3">
-              <div className="glass glass-card azulejo-baroque rounded-3xl p-6 azulejo-frame">
-                <h2 className="text-2xl font-bold text-white mb-2 relative z-10">{result.constitution}</h2>
-                <p className="text-white/60 text-sm relative z-10">{result.diagnosis}</p>
+              <div className="glass glass-card rounded-3xl p-6 azulejo-frame bg-white">
+                <h2 className="text-2xl font-bold text-azulejo-900 mb-2 relative z-10">{result.constitution}</h2>
+                <p className="text-azulejo-600 text-sm relative z-10">{result.diagnosis}</p>
               </div>
 
               {[
@@ -112,19 +111,19 @@ export default function TongueDiagnosis() {
                 { label: t('tongue.advice'),   value: result.recommendation,  emoji: '💡' },
               ].map((d, i) => (
                 <motion.div key={d.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }}
-                  className="glass glass-thin rounded-2xl p-4">
-                  <p className="text-white/80 font-medium text-sm mb-1 relative z-10">{d.emoji} {d.label}</p>
-                  <p className="text-white/55 text-sm leading-relaxed relative z-10">{d.value}</p>
+                  className="glass glass-thin rounded-2xl p-4 bg-white/70">
+                  <p className="text-azulejo-800 font-medium text-sm mb-1 relative z-10">{d.emoji} {d.label}</p>
+                  <p className="text-azulejo-600 text-sm leading-relaxed relative z-10">{d.value}</p>
                 </motion.div>
               ))}
 
               {result.teas?.length > 0 && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-                  className="glass glass-thin rounded-2xl p-4">
-                  <p className="text-white/80 font-medium text-sm mb-3 relative z-10">{t('tongue.recommended')}</p>
+                  className="glass glass-thin rounded-2xl p-4 bg-white/70">
+                  <p className="text-azulejo-800 font-medium text-sm mb-3 relative z-10">{t('tongue.recommended')}</p>
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {result.teas.map(t => (
-                      <span key={t} className="bg-herbal-sage-500/15 border border-herbal-sage-400/20 rounded-full px-3 py-1.5 text-herbal-sage-300 text-sm">{t}</span>
+                      <span key={t} className="bg-azulejo-50 border border-azulejo-200 rounded-full px-3 py-1.5 text-azulejo-700 text-sm">{t}</span>
                     ))}
                   </div>
                 </motion.div>

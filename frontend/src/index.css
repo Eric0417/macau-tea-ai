@@ -12,8 +12,8 @@ html, body, #root {
 }
 
 body {
-  background: #040B18;
-  color: rgba(255,255,255,0.90);
+  background: #FAF8F5;
+  color: var(--lg-text-1);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
