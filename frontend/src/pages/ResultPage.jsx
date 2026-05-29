@@ -59,7 +59,7 @@ export default function ResultPage() {
         </button>
 
         {/* Header */}
-        <div className="glass glass-card azulejo-marble rounded-3xl p-6 mb-4 azulejo-frame">
+        <div className="glass glass-card azulejo-cross rounded-3xl p-6 mb-4 azulejo-frame">
           <div className="flex items-center gap-3 mb-3 relative z-10">
             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${tea ? 'bg-herbal-sage-500/20' : 'bg-cinnabar-500/20'}`}>
               {tea ? <Leaf size={24} className="text-herbal-sage-300" /> : <Scan size={24} className="text-cinnabar-300" />}

@@ -57,7 +57,7 @@ export default function TongueDiagnosis() {
         {/* Upload / Preview */}
         {!preview ? (
           <div onClick={() => fileRef.current?.click()}
-            className="glass azulejo-baroque rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-white/20 hover:border-white/30 transition-all">
+            className="glass azulejo-circles rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-white/20 hover:border-white/30 transition-all">
             <div className="bg-white/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
               <Camera size={28} className="text-white/60" />
             </div>
@@ -102,7 +102,7 @@ export default function TongueDiagnosis() {
         <AnimatePresence>
           {result && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6 space-y-3">
-              <div className="glass glass-card azulejo-baroque rounded-3xl p-6 azulejo-frame">
+              <div className="glass glass-card azulejo-circles rounded-3xl p-6 azulejo-frame">
                 <h2 className="text-2xl font-bold text-white mb-2 relative z-10">{result.constitution}</h2>
                 <p className="text-white/60 text-sm relative z-10">{result.diagnosis}</p>
               </div>

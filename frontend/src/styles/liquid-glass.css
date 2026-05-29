@@ -1,11 +1,11 @@
 /* ═══════════════════════════════════════════════════════════
-   Liquid Glass Design System — Azulejo Latte Art
-   葡式瓷磚拉花風格
+   Liquid Glass Design System — Portuguese Azulejo Tiles
+   葡式花磚風格 — 有規律的重複幾何圖案
    ═══════════════════════════════════════════════════════════ */
 
 /* ────────────────── Design Tokens ────────────────── */
 :root {
-  /* Surface fills (dark background) */
+  /* Surface fills */
   --lg-surface:            rgba(255,255,255,0.07);
   --lg-surface-elevated:   rgba(255,255,255,0.11);
   --lg-surface-thick:      rgba(255,255,255,0.16);
@@ -62,27 +62,42 @@
   --lg-text-2: rgba(255,255,255,0.50);
   --lg-text-3: rgba(255,255,255,0.26);
 
-  /* Accent — Azulejo Cobalt (葡式花磚鈷藍) */
+  /* Accent — Azulejo Cobalt Blue */
   --lg-accent:      #4A7BC8;
   --lg-accent-h:    #7BA3DD;
   --lg-accent-d:    #2B5590;
-  --lg-accent-text: #040C18;
+  --lg-accent-text: #F5EFE6;
 
-  /* Secondary — Cream White (瓷白) */
-  --lg-cream:       #F5EFE6;
-  --lg-cream-dim:   rgba(245,239,230,0.60);
+  /* Tile Blue */
+  --azulejo-blue:       rgba(74,123,200,1);
+  --azulejo-blue-40:    rgba(74,123,200,0.40);
+  --azulejo-blue-30:    rgba(74,123,200,0.30);
+  --azulejo-blue-25:    rgba(74,123,200,0.25);
+  --azulejo-blue-20:    rgba(74,123,200,0.20);
+  --azulejo-blue-15:    rgba(74,123,200,0.15);
+  --azulejo-blue-12:    rgba(74,123,200,0.12);
+  --azulejo-blue-10:    rgba(74,123,200,0.10);
+  --azulejo-blue-08:    rgba(74,123,200,0.08);
+  --azulejo-blue-06:    rgba(74,123,200,0.06);
+  --azulejo-blue-04:    rgba(74,123,200,0.04);
 
-  /* Warm Gold (復古金) */
+  /* Cream White */
+  --azulejo-cream:      rgba(245,239,230,1);
+  --azulejo-cream-20:   rgba(245,239,230,0.20);
+  --azulejo-cream-10:   rgba(245,239,230,0.10);
+  --azulejo-cream-06:   rgba(245,239,230,0.06);
+
+  /* Warm Gold */
   --lg-gold:        #C8905B;
   --lg-gold-h:      #DEB887;
   --lg-gold-d:      #A0723D;
 
-  /* Herbal Sage (草藥青) */
+  /* Herbal Sage */
   --lg-sage:        #7DA07A;
   --lg-sage-h:      #A3BC95;
   --lg-sage-d:      #5C7A5A;
 
-  /* Cinnabar Red (朱砂紅) */
+  /* Cinnabar */
   --lg-cinnabar:    #C0675E;
   --lg-cinnabar-h:  #D9877E;
   --lg-cinnabar-d:  #944840;
@@ -92,88 +107,185 @@
   --lg-success:     #5BA890;
 }
 
-/* ────────────────── Azulejo Latte Art Patterns ────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   Portuguese Azulejo Tile Patterns — 有規律的花磚圖案
+   Each pattern is a precisely repeating tile (seamless grid)
+   ═══════════════════════════════════════════════════════════ */
 
-/*
- * Marble Swirl — 瓷磚拉花大理石紋
- * Simulates the flowing, swirled patterns of Portuguese baroque tiles
- * using layered offset radial gradients
- */
-.azulejo-marble {
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(74,123,200,0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 50%, rgba(74,123,200,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 20%, rgba(200,180,140,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(74,123,200,0.07) 0%, transparent 50%),
-    radial-gradient(circle at 30% 70%, rgba(74,123,200,0.04) 0%, transparent 40%),
-    radial-gradient(circle at 70% 30%, rgba(200,180,140,0.04) 0%, transparent 40%);
+/* ── Tile 1: Diamond Lattice 菱形格紋 ──
+   Classic Portuguese lozenge grid.
+   Diagonal lines + center dot = infinite diamond net. */
+.azulejo-diamond {
+  background-image:
+    /* Center dot in each diamond */
+    radial-gradient(circle, var(--azulejo-blue-20) 2px, transparent 2.5px),
+    /* Diagonal line ↘ */
+    linear-gradient(135deg, transparent 45%, var(--azulejo-blue-10) 45.5%, var(--azulejo-blue-10) 54.5%, transparent 55%),
+    /* Diagonal line ↗ */
+    linear-gradient(45deg, transparent 45%, var(--azulejo-blue-10) 45.5%, var(--azulejo-blue-10) 54.5%, transparent 55%),
+    /* Diagonal line ↘ offset by half tile for the cross */
+    linear-gradient(135deg, transparent calc(50% - 2px), var(--azulejo-blue-15) 50%, transparent calc(50% + 2px)),
+    /* Diagonal line ↗ offset */
+    linear-gradient(45deg, transparent calc(50% - 2px), var(--azulejo-blue-15) 50%, transparent calc(50% + 2px));
+  background-size: 28px 28px;
+  background-position: 0 0, 0 0, 0 0, 14px 14px, 14px 14px;
 }
 
-/*
- * Latte Art Swirl — 拉花漩渦紋
- * Concentric offset ellipses creating a poured latte art swirl effect
- */
-.azulejo-swirl {
-  background:
-    radial-gradient(ellipse 80% 60% at 45% 55%, transparent 30%, rgba(74,123,200,0.06) 30.5%, transparent 31%),
-    radial-gradient(ellipse 60% 40% at 48% 52%, transparent 38%, rgba(74,123,200,0.07) 38.5%, transparent 39%),
-    radial-gradient(ellipse 40% 25% at 47% 53%, transparent 45%, rgba(74,123,200,0.08) 45.5%, transparent 46%),
-    radial-gradient(circle at 50% 50%, rgba(245,239,230,0.04) 0%, transparent 15%);
+/* ── Tile 2: Interlocking Circles 環環相扣 ──
+   Quarter-circles at tile corners. When 4 tiles meet,
+   four quarter-circles form a perfect full circle. */
+.azulejo-circles {
+  background-image:
+    /* Quarter circle at top-left → forms full circle at tile intersections */
+    radial-gradient(circle at 0 0, var(--azulejo-blue-25) 12px, transparent 12.5px),
+    /* Quarter circle at top-right */
+    radial-gradient(circle at 100% 0, var(--azulejo-blue-25) 12px, transparent 12.5px),
+    /* Quarter circle at bottom-left */
+    radial-gradient(circle at 0 100%, var(--azulejo-blue-25) 12px, transparent 12.5px),
+    /* Quarter circle at bottom-right */
+    radial-gradient(circle at 100% 100%, var(--azulejo-blue-25) 12px, transparent 12.5px),
+    /* Small center medallion */
+    radial-gradient(circle at 50% 50%, var(--azulejo-blue-20) 5px, transparent 5.5px),
+    /* Tiny center dot */
+    radial-gradient(circle at 50% 50%, var(--azulejo-cream-20) 2px, transparent 2.5px);
+  background-size: 32px 32px;
+  background-position: 0 0;
 }
 
-/*
- * Baroque Flourish — 巴洛克卷草紋
- * Ornate scrolling vine pattern inspired by Portuguese baroque tile borders
- */
-.azulejo-baroque {
-  background:
-    radial-gradient(circle at 15% 50%, rgba(74,123,200,0.08) 0%, transparent 25%),
-    radial-gradient(circle at 85% 50%, rgba(74,123,200,0.08) 0%, transparent 25%),
-    radial-gradient(circle at 50% 15%, rgba(74,123,200,0.05) 0%, transparent 20%),
-    radial-gradient(circle at 50% 85%, rgba(74,123,200,0.05) 0%, transparent 20%),
-    conic-gradient(from 0deg at 20% 50%, transparent 0deg, rgba(74,123,200,0.04) 90deg, transparent 180deg, rgba(74,123,200,0.04) 270deg, transparent 360deg),
-    conic-gradient(from 180deg at 80% 50%, transparent 0deg, rgba(74,123,200,0.04) 90deg, transparent 180deg, rgba(74,123,200,0.04) 270deg, transparent 360deg);
+/* ── Tile 3: Floral Cross 十字花紋 ──
+   Symmetrical cross + corner posts in each tile.
+   Tiling creates a continuous linked-cross pattern. */
+.azulejo-cross {
+  background-image:
+    /* Corner posts — small solid diamonds at each corner */
+    radial-gradient(circle at 0 0, var(--azulejo-blue-30) 3px, transparent 3.5px),
+    radial-gradient(circle at 100% 0, var(--azulejo-blue-30) 3px, transparent 3.5px),
+    radial-gradient(circle at 0 100%, var(--azulejo-blue-30) 3px, transparent 3.5px),
+    radial-gradient(circle at 100% 100%, var(--azulejo-blue-30) 3px, transparent 3.5px),
+    /* Vertical arm of the cross */
+    linear-gradient(0deg, transparent calc(50% - 14px), var(--azulejo-blue-20) calc(50% - 14px), var(--azulejo-blue-20) calc(50% + 14px), transparent calc(50% + 14px)),
+    /* Horizontal arm of the cross */
+    linear-gradient(90deg, transparent calc(50% - 14px), var(--azulejo-blue-20) calc(50% - 14px), var(--azulejo-blue-20) calc(50% + 14px), transparent calc(50% + 14px)),
+    /* Center flower — 4 small petals */
+    radial-gradient(circle at 50% calc(50% - 5px), var(--azulejo-blue-30) 3px, transparent 3.5px),
+    radial-gradient(circle at 50% calc(50% + 5px), var(--azulejo-blue-30) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(50% - 5px) 50%, var(--azulejo-blue-30) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(50% + 5px) 50%, var(--azulejo-blue-30) 3px, transparent 3.5px),
+    /* Center dot */
+    radial-gradient(circle at 50% 50%, var(--azulejo-cream-20) 2px, transparent 2.5px);
+  background-size: 36px 36px;
+  background-position: 0 0;
 }
 
-/*
- * Wave Border — 浪花邊框
- * Flowing wave pattern like the rippled edges of baroque tile frames
- */
+/* ── Tile 4: Star Grid 星形網紋 ──
+   4-pointed stars created by diagonal bands crossing at each tile center.
+   When repeated, forms an 8-pointed star at intersections. */
+.azulejo-star {
+  background-image:
+    /* Small dot at every corner intersection */
+    radial-gradient(circle at 0 0, var(--azulejo-blue-30) 2.5px, transparent 3px),
+    radial-gradient(circle at 100% 0, var(--azulejo-blue-30) 2.5px, transparent 3px),
+    radial-gradient(circle at 0 100%, var(--azulejo-blue-30) 2.5px, transparent 3px),
+    radial-gradient(circle at 100% 100%, var(--azulejo-blue-30) 2.5px, transparent 3px),
+    /* Center star — diagonal cross */
+    linear-gradient(45deg, transparent calc(50% - 8px), var(--azulejo-blue-20) calc(50% - 8px), var(--azulejo-blue-20) calc(50% + 8px), transparent calc(50% + 8px)),
+    linear-gradient(135deg, transparent calc(50% - 8px), var(--azulejo-blue-20) calc(50% - 8px), var(--azulejo-blue-20) calc(50% + 8px), transparent calc(50% + 8px)),
+    /* Center crisp dot */
+    radial-gradient(circle at 50% 50%, var(--azulejo-cream-20) 2px, transparent 2.5px);
+  background-size: 24px 24px;
+  background-position: 0 0;
+}
+
+/* ── Tile 5: Wave Pattern 海浪紋 ──
+   The iconic Macau/Lisbon pavement wave (Senado Square style).
+   Regular repeating cosine-like wave in blue. */
 .azulejo-wave {
-  position: relative;
-}
-.azulejo-wave::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 1.5px solid transparent;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(74,123,200,0.10) 3px,
-      rgba(74,123,200,0.10) 4px,
-      transparent 4px,
-      transparent 7px
-    ) border-box;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: 3;
+  background-image:
+    /* Upper wave crest */
+    radial-gradient(ellipse 18px 10px at 50% 0%, var(--azulejo-blue-15) 0%, transparent 70%),
+    /* Lower wave trough */
+    radial-gradient(ellipse 18px 10px at 50% 100%, var(--azulejo-blue-15) 0%, transparent 70%),
+    /* Connecting wave line — sine wave via offset ellipses */
+    radial-gradient(ellipse 12px 7px at 25% 50%, var(--azulejo-blue-12) 0%, transparent 70%),
+    radial-gradient(ellipse 12px 7px at 75% 50%, var(--azulejo-blue-12) 0%, transparent 70%),
+    /* Thin connecting line through the middle */
+    linear-gradient(90deg, transparent 0%, var(--azulejo-blue-08) 15%, var(--azulejo-blue-08) 85%, transparent 100%);
+  background-size: 40px 24px;
+  background-position: 0 0;
 }
 
-/*
- * Tile Frame — 花磚畫框
- * Multi-layered ornate frame with gold + cobalt details
- */
+/* ── Tile 6: Scallop / Shell 扇形貝紋 ──
+   Overlapping scale/scallop pattern — common in Portuguese Manueline style.
+   Each row offset by half to create the overlapping scale effect. */
+.azulejo-scallop {
+  background-image:
+    /* Row 1: scallop arches */
+    radial-gradient(circle at 25% 0%, transparent 60%, var(--azulejo-blue-12) 60.5%, var(--azulejo-blue-12) 80%, transparent 80.5%),
+    radial-gradient(circle at 75% 0%, transparent 60%, var(--azulejo-blue-12) 60.5%, var(--azulejo-blue-12) 80%, transparent 80.5%),
+    /* Row 2: offset scallop arches */
+    radial-gradient(circle at 0% 50%, transparent 60%, var(--azulejo-blue-12) 60.5%, var(--azulejo-blue-12) 80%, transparent 80.5%),
+    radial-gradient(circle at 50% 50%, transparent 60%, var(--azulejo-blue-12) 60.5%, var(--azulejo-blue-12) 80%, transparent 80.5%),
+    radial-gradient(circle at 100% 50%, transparent 60%, var(--azulejo-blue-12) 60.5%, var(--azulejo-blue-12) 80%, transparent 80.5%),
+    /* Row 3: scallop arches */
+    radial-gradient(circle at 25% 100%, transparent 60%, var(--azulejo-blue-12) 60.5%, var(--azulejo-blue-12) 80%, transparent 80.5%),
+    radial-gradient(circle at 75% 100%, transparent 60%, var(--azulejo-blue-12) 60.5%, var(--azulejo-blue-12) 80%, transparent 80.5%),
+    /* Center dots at each scallop base */
+    radial-gradient(circle at 25% 0%, var(--azulejo-blue-20) 1.5px, transparent 2px),
+    radial-gradient(circle at 75% 0%, var(--azulejo-blue-20) 1.5px, transparent 2px),
+    radial-gradient(circle at 0% 50%, var(--azulejo-blue-20) 1.5px, transparent 2px),
+    radial-gradient(circle at 50% 50%, var(--azulejo-blue-20) 1.5px, transparent 2px),
+    radial-gradient(circle at 100% 50%, var(--azulejo-blue-20) 1.5px, transparent 2px),
+    radial-gradient(circle at 25% 100%, var(--azulejo-blue-20) 1.5px, transparent 2px),
+    radial-gradient(circle at 75% 100%, var(--azulejo-blue-20) 1.5px, transparent 2px);
+  background-size: 40px 40px;
+  background-position: 0 0;
+}
+
+/* ── Tile 7: Braided Chain 編織鎖鏈 ──
+   Interlocking oval links forming a continuous chain.
+   Each tile contains two crossing links. */
+.azulejo-chain {
+  background-image:
+    /* Horizontal oval links */
+    radial-gradient(ellipse 16px 8px at 50% 25%, transparent 40%, var(--azulejo-blue-15) 41%, var(--azulejo-blue-15) 60%, transparent 61%),
+    radial-gradient(ellipse 16px 8px at 50% 75%, transparent 40%, var(--azulejo-blue-15) 41%, var(--azulejo-blue-15) 60%, transparent 61%),
+    /* Vertical oval links (offset for weave effect) */
+    radial-gradient(ellipse 8px 16px at 25% 50%, transparent 40%, var(--azulejo-blue-15) 41%, var(--azulejo-blue-15) 60%, transparent 61%),
+    radial-gradient(ellipse 8px 16px at 75% 50%, transparent 40%, var(--azulejo-blue-15) 41%, var(--azulejo-blue-15) 60%, transparent 61%),
+    /* Tiny dots at linkage points */
+    radial-gradient(circle at 25% 25%, var(--azulejo-blue-25) 2px, transparent 2.5px),
+    radial-gradient(circle at 75% 25%, var(--azulejo-blue-25) 2px, transparent 2.5px),
+    radial-gradient(circle at 25% 75%, var(--azulejo-blue-25) 2px, transparent 2.5px),
+    radial-gradient(circle at 75% 75%, var(--azulejo-blue-25) 2px, transparent 2.5px);
+  background-size: 32px 32px;
+  background-position: 0 0;
+}
+
+/* ── Tile 8: Checker Medallion 格紋團花 ──
+   Alternating medallion + diamond pattern creating a checkerboard.
+   Two-tile-wide repeat for the checker effect. */
+.azulejo-medallion {
+  background-image:
+    /* Medallion tile — concentric rings at (25%, 25%) */
+    radial-gradient(circle at 25% 25%, transparent 6px, var(--azulejo-blue-10) 6.5px, var(--azulejo-blue-10) 7.5px, transparent 8px),
+    radial-gradient(circle at 25% 25%, var(--azulejo-blue-20) 4px, transparent 4.5px),
+    /* Diamond tile — cross at (75%, 75%) */
+    linear-gradient(45deg, transparent calc(50% + 2px), var(--azulejo-blue-10) calc(50% + 2px), var(--azulejo-blue-10) calc(50% + 2.5px), transparent calc(50% + 2.5px)),
+    /* Corner anchors */
+    radial-gradient(circle at 0 0, var(--azulejo-blue-20) 2px, transparent 2.5px),
+    radial-gradient(circle at 100% 0, var(--azulejo-blue-20) 2px, transparent 2.5px),
+    radial-gradient(circle at 0 100%, var(--azulejo-blue-20) 2px, transparent 2.5px),
+    radial-gradient(circle at 100% 100%, var(--azulejo-blue-20) 2px, transparent 2.5px),
+    /* Center dots in the alternate tile */
+    radial-gradient(circle at 75% 25%, var(--azulejo-blue-15) 2.5px, transparent 3px),
+    radial-gradient(circle at 25% 75%, var(--azulejo-blue-15) 2.5px, transparent 3px);
+  background-size: 40px 40px;
+  background-position: 0 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Tile Frame — 花磚畫框 (geometric border)
+   ═══════════════════════════════════════════════════════════ */
 .azulejo-frame {
   position: relative;
 }
@@ -182,83 +294,11 @@
   position: absolute;
   inset: 3px;
   border-radius: inherit;
-  border: 1.5px solid rgba(74,123,200,0.16);
-  box-shadow:
-    inset 0 0 0 3px rgba(74,123,200,0.05),
-    inset 0 0 0 5px rgba(200,144,91,0.04),
-    0 0 0 3px rgba(74,123,200,0.04);
+  border: 1.5px solid var(--azulejo-blue-20);
+  outline: 3px solid var(--azulejo-blue-06);
+  outline-offset: -6px;
   pointer-events: none;
   z-index: 3;
-}
-
-/*
- * Spiral Medallion — 漩渦花飾
- * Center medallion pattern found in traditional Portuguese tile panels
- */
-.azulejo-medallion {
-  background:
-    radial-gradient(circle at 50% 50%, rgba(74,123,200,0.10) 0%, rgba(74,123,200,0.02) 30%, transparent 40%),
-    radial-gradient(circle at 50% 50%, transparent 35%, rgba(200,144,91,0.04) 36%, transparent 38%),
-    radial-gradient(circle at 50% 50%, transparent 42%, rgba(74,123,200,0.06) 43%, transparent 46%),
-    conic-gradient(from 0deg, transparent 0deg, rgba(74,123,200,0.03) 5deg, transparent 10deg, transparent 85deg, rgba(74,123,200,0.03) 90deg, transparent 95deg, transparent 175deg, rgba(74,123,200,0.03) 180deg, transparent 185deg, transparent 265deg, rgba(74,123,200,0.03) 270deg, transparent 275deg, transparent 355deg, rgba(74,123,200,0.03) 360deg);
-}
-
-/*
- * Lace Doily — 蕾絲花邊
- * Delicate repeating ornamental pattern like lace/doily tile work
- */
-.azulejo-lace {
-  background:
-    radial-gradient(circle at 0% 0%, rgba(74,123,200,0.07) 4px, transparent 5px),
-    radial-gradient(circle at 50% 0%, rgba(74,123,200,0.07) 4px, transparent 5px),
-    radial-gradient(circle at 100% 0%, rgba(74,123,200,0.07) 4px, transparent 5px),
-    radial-gradient(circle at 0% 50%, rgba(74,123,200,0.07) 4px, transparent 5px),
-    radial-gradient(circle at 100% 50%, rgba(74,123,200,0.07) 4px, transparent 5px),
-    radial-gradient(circle at 0% 100%, rgba(74,123,200,0.07) 4px, transparent 5px),
-    radial-gradient(circle at 50% 100%, rgba(74,123,200,0.07) 4px, transparent 5px),
-    radial-gradient(circle at 100% 100%, rgba(74,123,200,0.07) 4px, transparent 5px),
-    radial-gradient(circle at 50% 50%, rgba(200,144,91,0.05) 3px, transparent 4px);
-  background-size: 32px 32px;
-}
-
-/*
- * Flowing Ribbon — 流動絲帶紋
- * Wavy ribbon pattern common in rococo/baroque azulejo borders
- */
-.azulejo-ribbon {
-  background:
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 6px,
-      rgba(74,123,200,0.04) 6px,
-      rgba(74,123,200,0.04) 7px,
-      transparent 7px,
-      transparent 14px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 6px,
-      rgba(200,144,91,0.03) 6px,
-      rgba(200,144,91,0.03) 7px,
-      transparent 7px,
-      transparent 14px
-    );
-}
-
-/*
- * Scallop Edge — 扇形貝殼邊
- * Scalloped motif seen in Portuguese Manueline / maritime tile work
- */
-.azulejo-scallop {
-  background:
-    radial-gradient(circle at 25% 25%, rgba(74,123,200,0.07) 12px, transparent 13px),
-    radial-gradient(circle at 75% 25%, rgba(74,123,200,0.07) 12px, transparent 13px),
-    radial-gradient(circle at 25% 75%, rgba(74,123,200,0.07) 12px, transparent 13px),
-    radial-gradient(circle at 75% 75%, rgba(74,123,200,0.07) 12px, transparent 13px),
-    radial-gradient(circle at 50% 50%, rgba(200,144,91,0.05) 6px, transparent 7px);
-  background-size: 48px 48px;
 }
 
 /* ────────────────── Base ────────────────── */
@@ -292,9 +332,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background:
-    var(--lg-highlight),
-    var(--lg-noise-svg);
+  background: var(--lg-highlight), var(--lg-noise-svg);
   background-size: auto, 200px 200px;
   opacity: var(--lg-noise-opacity);
   pointer-events: none;
@@ -342,13 +380,16 @@
   }
 }
 
-/* ── Glass + Marble fusion ── */
-.glass-marble {
+/* ── Glass + Tile pattern combo ── */
+.glass-tile {
   background:
-    radial-gradient(ellipse at 30% 60%, rgba(74,123,200,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 40%, rgba(200,180,140,0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(74,123,200,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 0 0, var(--azulejo-blue-12) 10px, transparent 10.5px),
+    radial-gradient(circle at 100% 0, var(--azulejo-blue-12) 10px, transparent 10.5px),
+    radial-gradient(circle at 0 100%, var(--azulejo-blue-12) 10px, transparent 10.5px),
+    radial-gradient(circle at 100% 100%, var(--azulejo-blue-12) 10px, transparent 10.5px),
     var(--lg-surface);
+  background-size: 28px 28px, 28px 28px, 28px 28px, 28px 28px, auto;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
 }
 
 /* ── Radius helpers ── */
@@ -366,7 +407,6 @@
   transition: transform var(--lg-dur) var(--lg-ease),
               box-shadow var(--lg-dur) var(--lg-ease);
 }
-
 .glass-card:hover {
   transform: translateY(-1px);
   box-shadow: var(--lg-shadow-elevated);
@@ -430,7 +470,7 @@
   background: var(--lg-surface-elevated);
 }
 
-/* Primary button — Azulejo Cobalt */
+/* Primary button */
 .glass-btn-primary {
   background: rgba(74,123,200,0.78);
   color: #F5EFE6;
@@ -439,19 +479,15 @@
     inset 0 0.5px 0 0 rgba(255,255,255,0.22),
     0 2px 8px 0 rgba(74,123,200,0.22);
 }
-
 .glass-btn-primary:hover {
   background: rgba(123,163,221,0.84);
   box-shadow:
     inset 0 0.5px 0 0 rgba(255,255,255,0.28),
     0 4px 14px 0 rgba(74,123,200,0.30);
 }
+.glass-btn-primary:active { background: rgba(43,85,144,0.82); }
 
-.glass-btn-primary:active {
-  background: rgba(43,85,144,0.82);
-}
-
-/* Gold accent button */
+/* Gold button */
 .glass-btn-gold {
   background: rgba(200,144,91,0.78);
   color: #0F0A04;
@@ -460,7 +496,6 @@
     inset 0 0.5px 0 0 rgba(255,255,255,0.22),
     0 2px 8px 0 rgba(200,144,91,0.20);
 }
-
 .glass-btn-gold:hover {
   background: rgba(222,184,135,0.84);
   box-shadow:
@@ -483,29 +518,20 @@
   transition: border-color var(--lg-dur) var(--lg-ease),
               box-shadow var(--lg-dur) var(--lg-ease);
 }
-
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .glass-input {
     -webkit-backdrop-filter: blur(var(--lg-blur-sm));
     backdrop-filter: blur(var(--lg-blur-sm));
   }
 }
-
-.glass-input::placeholder {
-  color: var(--lg-text-3);
-}
-
+.glass-input::placeholder { color: var(--lg-text-3); }
 .glass-input:focus {
   border-color: var(--lg-accent);
   box-shadow:
     inset 0 1px 3px 0 rgba(0,0,0,0.12),
     0 0 0 3px rgba(74,123,200,0.18);
 }
-
-textarea.glass-input {
-  resize: vertical;
-  min-height: 80px;
-}
+textarea.glass-input { resize: vertical; min-height: 80px; }
 
 /* Chat bubbles */
 .glass-bubble {
@@ -514,21 +540,18 @@ textarea.glass-input {
   border-radius: var(--lg-r-md);
   overflow: hidden;
 }
-
 .glass-bubble-ai {
   background: var(--lg-surface);
   border: 1px solid var(--lg-border-color);
   box-shadow: var(--lg-shadow);
   border-bottom-left-radius: var(--lg-r-xs);
 }
-
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .glass-bubble-ai {
     -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(1.5);
     backdrop-filter: blur(var(--lg-blur)) saturate(1.5);
   }
 }
-
 .glass-bubble-user {
   background: rgba(74,123,200,0.68);
   color: #F5EFE6;
@@ -539,7 +562,7 @@ textarea.glass-input {
   border-bottom-right-radius: var(--lg-r-xs);
 }
 
-/* Modal / Dialog */
+/* Modal */
 .glass-overlay {
   position: fixed;
   inset: 0;
@@ -549,19 +572,13 @@ textarea.glass-input {
   align-items: center;
   justify-content: center;
 }
-
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .glass-overlay {
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
   }
 }
-
-.glass-modal {
-  width: 90%;
-  max-width: 480px;
-  padding: 24px;
-}
+.glass-modal { width: 90%; max-width: 480px; padding: 24px; }
 
 /* Divider */
 .glass-divider {
@@ -570,46 +587,28 @@ textarea.glass-input {
   background: var(--lg-border-color-subtle);
   margin: 16px 0;
 }
-
-/* Azulejo ornamental divider */
 .azulejo-divider {
   height: 2px;
   border: none;
-  background:
-    linear-gradient(90deg,
-      transparent 0%,
-      rgba(74,123,200,0.30) 20%,
-      rgba(74,123,200,0.30) 40%,
-      transparent 50%,
-      rgba(200,144,91,0.20) 60%,
-      rgba(200,144,91,0.20) 80%,
-      transparent 100%
-    );
+  background: linear-gradient(90deg,
+    transparent 0%, var(--azulejo-blue-30) 20%, var(--azulejo-blue-30) 40%,
+    transparent 50%,
+    rgba(200,144,91,0.20) 60%, rgba(200,144,91,0.20) 80%,
+    transparent 100%);
   margin: 16px 0;
 }
 
-/* Scrollbar (Webkit) */
+/* Scrollbar */
 .glass ::-webkit-scrollbar,
-.glass-scroll::-webkit-scrollbar {
-  width: 6px;
-}
+.glass-scroll::-webkit-scrollbar { width: 6px; }
 .glass ::-webkit-scrollbar-track,
-.glass-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
+.glass-scroll::-webkit-scrollbar-track { background: transparent; }
 .glass ::-webkit-scrollbar-thumb,
-.glass-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.10);
-  border-radius: 3px;
-}
+.glass-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 3px; }
 
-/* ────────────────── Decorative Ornaments ────────────────── */
-
-/* Cobalt seal dot */
+/* ────────────────── Ornaments ────────────────── */
 .herbal-seal {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  width: 8px; height: 8px; border-radius: 50%;
   background: var(--lg-cinnabar);
   box-shadow: 0 0 6px rgba(192,103,94,0.4);
   display: inline-block;
@@ -620,7 +619,6 @@ textarea.glass-input {
 .lg-text-2 { color: var(--lg-text-2); }
 .lg-text-3 { color: var(--lg-text-3); }
 .lg-accent  { color: var(--lg-accent); }
-
 .text-azulejo { color: var(--lg-accent); }
 .text-herbal-gold { color: var(--lg-gold); }
 .text-herbal-sage { color: var(--lg-sage); }
@@ -643,31 +641,18 @@ textarea.glass-input {
   outline: 2px solid var(--lg-accent);
   outline-offset: 2px;
 }
-
 .glass-btn:focus-visible {
   outline: 2px solid var(--lg-accent);
   outline-offset: 2px;
-  box-shadow:
-    var(--lg-shadow-button),
-    0 0 0 4px rgba(74,123,200,0.20);
+  box-shadow: var(--lg-shadow-button), 0 0 0 4px rgba(74,123,200,0.20);
 }
-
 @media (forced-colors: active) {
-  .glass,
-  .glass-elevated,
-  .glass-thin,
-  .glass-thick,
-  .glass-btn,
-  .glass-input,
-  .glass-bubble-ai,
-  .glass-bubble-user {
+  .glass, .glass-elevated, .glass-thin, .glass-thick,
+  .glass-btn, .glass-input, .glass-bubble-ai, .glass-bubble-user {
     border: 1px solid ButtonText;
     background: Canvas;
     color: CanvasText;
     forced-color-adjust: auto;
   }
-  .glass::before,
-  .glass::after {
-    display: none;
-  }
+  .glass::before, .glass::after { display: none; }
 }
