@@ -9,6 +9,7 @@ import TongueDiagnosis from './pages/TongueDiagnosis';
 import AiConsultation from './pages/AiConsultation';
 import History from './pages/History';
 import ResultPage from './pages/ResultPage';
+import AzulejoWallPage from './pages/AzulejoWallPage';
 
 /* ── Liquid Glass 動畫設定 ────────────── */
 const LG_EASE = [0.2, 0.8, 0.2, 1];
@@ -101,6 +102,7 @@ function AppContent() {
             <Route path="/chat"    element={<AiConsultation />} />
             <Route path="/history" element={<History />} />
             <Route path="/result/:id" element={<ResultPage />} />
+            <Route path="/wall" element={<AzulejoWallPage />} />
           </Routes>
         </motion.div>
       </AnimatePresence>

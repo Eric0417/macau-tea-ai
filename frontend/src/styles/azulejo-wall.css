@@ -1,0 +1,169 @@
+/* ═══════════════════════════════════════════════════════════
+   Azulejo Interactive Wall — 葡式花磚互動牆
+   純 SVG/CSS 繪製，無縫拼接幾何圖案，釉面立體質感
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 花磚牆容器 ── */
+.az-wall {
+  display: grid;
+  gap: 0;
+  /* grid-template-columns 由 JS inline style 動態設定 */
+  perspective: 900px;
+}
+
+/* ── 單一花磚基底 ── */
+.az-tile {
+  position: relative;
+  aspect-ratio: 1;
+  cursor: pointer;
+  /* 釉面光澤 + 邊緣微瑕疵復古感 */
+  box-shadow:
+    inset 0 0 0 1px rgba(245,239,230,0.25),
+    inset 0 1px 0 0 rgba(255,255,255,0.12),
+    inset 0 -1px 0 0 rgba(0,0,0,0.10),
+    0 0 0 0.5px rgba(0,0,0,0.08);
+  transition: transform 0.35s var(--lg-ease),
+              box-shadow 0.35s var(--lg-ease),
+              z-index 0s step-end;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* ── 花磚圖案層（SVG 背景）── */
+.az-tile-bg {
+  position: absolute;
+  inset: 0;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.45s var(--lg-ease);
+}
+
+/* ── 四種花磚圖案 (純 SVG data URI) ── */
+
+/* 圖案 A：環環相扣 (Interlocking Rings)
+   四角為四分之一圓，拼接時形成完整圓環
+   中心的環與上下左右邊緣中點連接形成連續鏈條 */
+.az-pattern-circles .az-tile-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230055A5' stop-opacity='0.45'/%3E%3Cstop offset='100%25' stop-color='%231A6DB5' stop-opacity='0.30'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg opacity='1'%3E%3C!-- 四角四分之一圓 → 四塊拼成完整圓 --%3E%3Cpath d='M0,0 v38 A38,38 0 0,1 38,0 Z' fill='url(%23g)'/%3E%3Cpath d='M100,0 v38 A38,38 0 0,0 62,0 Z' fill='url(%23g)'/%3E%3Cpath d='M0,100 h38 A38,38 0 0,0 0,62 Z' fill='url(%23g)'/%3E%3Cpath d='M100,100 h-38 A38,38 0 0,1 100,62 Z' fill='url(%23g)'/%3E%3C!-- 四邊中點半圓 --%3E%3Cpath d='M31,0 A19,19 0 0,1 69,0' fill='none' stroke='%230055A5' stroke-opacity='0.35' stroke-width='2'/%3E%3Cpath d='M31,100 A19,19 0 0,0 69,100' fill='none' stroke='%230055A5' stroke-opacity='0.35' stroke-width='2'/%3E%3Cpath d='M0,31 A19,19 0 0,0 0,69' fill='none' stroke='%230055A5' stroke-opacity='0.35' stroke-width='2'/%3E%3Cpath d='M100,31 A19,19 0 0,1 100,69' fill='none' stroke='%230055A5' stroke-opacity='0.35' stroke-width='2'/%3E%3C!-- 中心花飾 --%3E%3Ccircle cx='50' cy='50' r='13' fill='none' stroke='%230055A5' stroke-opacity='0.35' stroke-width='1.8'/%3E%3Ccircle cx='50' cy='50' r='5' fill='none' stroke='%230055A5' stroke-opacity='0.45' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='2' fill='%23F4C430' fill-opacity='0.6'/%3E%3C!-- 十字連接線 --%3E%3Cline x1='50' y1='20' x2='50' y2='36' stroke='%230055A5' stroke-opacity='0.25' stroke-width='1.2'/%3E%3Cline x1='50' y1='64' x2='50' y2='80' stroke='%230055A5' stroke-opacity='0.25' stroke-width='1.2'/%3E%3Cline x1='20' y1='50' x2='36' y2='50' stroke='%230055A5' stroke-opacity='0.25' stroke-width='1.2'/%3E%3Cline x1='64' y1='50' x2='80' y2='50' stroke='%230055A5' stroke-opacity='0.25' stroke-width='1.2'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 圖案 B：菱格花紋 (Diamond Flower)
+   連續菱形網格，每個菱形中心有四瓣小花
+   四邊完全對稱確保無縫拼接 */
+.az-pattern-diamond .az-tile-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='d' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231A5DA0' stop-opacity='0.5'/%3E%3Cstop offset='100%25' stop-color='%238EBAE5' stop-opacity='0.25'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg%3E%3C!-- 十字對角線 — 形成連續菱形網格 --%3E%3Cline x1='0' y1='0' x2='100' y2='100' stroke='%230055A5' stroke-opacity='0.20' stroke-width='1.5'/%3E%3Cline x1='100' y1='0' x2='0' y2='100' stroke='%230055A5' stroke-opacity='0.20' stroke-width='1.5'/%3E%3C!-- 垂直水平輔助線 --%3E%3Cline x1='50' y1='0' x2='50' y2='100' stroke='%230055A5' stroke-opacity='0.10' stroke-width='0.8'/%3E%3Cline x1='0' y1='50' x2='100' y2='50' stroke='%230055A5' stroke-opacity='0.10' stroke-width='0.8'/%3E%3C!-- 四個菱形中心的花瓣 --%3E%3Ccircle cx='50' cy='50' r='10' fill='none' stroke='%238EBAE5' stroke-opacity='0.5' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='3' fill='%23F4C430' fill-opacity='0.55'/%3E%3C!-- 上下左右中心 --%3E%3Ccircle cx='50' cy='0' r='7' fill='none' stroke='%238EBAE5' stroke-opacity='0.4' stroke-width='1.2'/%3E%3Ccircle cx='50' cy='0' r='2.5' fill='%23FDFBF7' fill-opacity='0.4'/%3E%3Ccircle cx='50' cy='100' r='7' fill='none' stroke='%238EBAE5' stroke-opacity='0.4' stroke-width='1.2'/%3E%3Ccircle cx='50' cy='100' r='2.5' fill='%23FDFBF7' fill-opacity='0.4'/%3E%3Ccircle cx='0' cy='50' r='7' fill='none' stroke='%238EBAE5' stroke-opacity='0.4' stroke-width='1.2'/%3E%3Ccircle cx='0' cy='50' r='2.5' fill='%23FDFBF7' fill-opacity='0.4'/%3E%3Ccircle cx='100' cy='50' r='7' fill='none' stroke='%238EBAE5' stroke-opacity='0.4' stroke-width='1.2'/%3E%3Ccircle cx='100' cy='50' r='2.5' fill='%23FDFBF7' fill-opacity='0.4'/%3E%3C!-- 四角小花 — 與相鄰瓷磚拼接形成完整八瓣花 --%3E%3Ccircle cx='0' cy='0' r='8' fill='none' stroke='%230055A5' stroke-opacity='0.25' stroke-width='1.2'/%3E%3Ccircle cx='0' cy='0' r='2' fill='%23F4C430' fill-opacity='0.5'/%3E%3Ccircle cx='100' cy='0' r='8' fill='none' stroke='%230055A5' stroke-opacity='0.25' stroke-width='1.2'/%3E%3Ccircle cx='100' cy='0' r='2' fill='%23F4C430' fill-opacity='0.5'/%3E%3Ccircle cx='0' cy='100' r='8' fill='none' stroke='%230055A5' stroke-opacity='0.25' stroke-width='1.2'/%3E%3Ccircle cx='0' cy='100' r='2' fill='%23F4C430' fill-opacity='0.5'/%3E%3Ccircle cx='100' cy='100' r='8' fill='none' stroke='%230055A5' stroke-opacity='0.25' stroke-width='1.2'/%3E%3Ccircle cx='100' cy='100' r='2' fill='%23F4C430' fill-opacity='0.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 圖案 C：星芒萬花筒 (Star Kaleidoscope)
+   8 芒星由 45° 旋轉正方形疊加而成
+   鏡像對稱確保無縫拼貼 */
+.az-pattern-star .az-tile-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg%3E%3C!-- 外框方 --%3E%3Crect x='5' y='5' width='90' height='90' fill='none' stroke='%238EBAE5' stroke-opacity='0.3' stroke-width='1' rx='2'/%3E%3C!-- 45° 旋轉正方 — 形成八芒星 --%3E%3Crect x='15' y='15' width='70' height='70' fill='none' stroke='%230055A5' stroke-opacity='0.30' stroke-width='1.8' transform='rotate(45 50 50)'/%3E%3C!-- 第二層星芒 --%3E%3Crect x='25' y='25' width='50' height='50' fill='none' stroke='%238EBAE5' stroke-opacity='0.35' stroke-width='1.4' transform='rotate(22.5 50 50)'/%3E%3C!-- 中心團花 --%3E%3Ccircle cx='50' cy='50' r='14' fill='none' stroke='%230055A5' stroke-opacity='0.35' stroke-width='1.8'/%3E%3Ccircle cx='50' cy='50' r='8' fill='none' stroke='%238EBAE5' stroke-opacity='0.5' stroke-width='1.2'/%3E%3Ccircle cx='50' cy='50' r='3' fill='%23F4C430' fill-opacity='0.6'/%3E%3C!-- 四邊中點錨點 — 拼接時形成連續節點網 --%3E%3Ccircle cx='50' cy='0' r='3' fill='%230055A5' fill-opacity='0.3'/%3E%3Ccircle cx='50' cy='100' r='3' fill='%230055A5' fill-opacity='0.3'/%3E%3Ccircle cx='0' cy='50' r='3' fill='%230055A5' fill-opacity='0.3'/%3E%3Ccircle cx='100' cy='50' r='3' fill='%230055A5' fill-opacity='0.3'/%3E%3C!-- 四角錨點 --%3E%3Ccircle cx='0' cy='0' r='4' fill='none' stroke='%238EBAE5' stroke-opacity='0.35' stroke-width='1.2'/%3E%3Ccircle cx='100' cy='0' r='4' fill='none' stroke='%238EBAE5' stroke-opacity='0.35' stroke-width='1.2'/%3E%3Ccircle cx='0' cy='100' r='4' fill='none' stroke='%238EBAE5' stroke-opacity='0.35' stroke-width='1.2'/%3E%3Ccircle cx='100' cy='100' r='4' fill='none' stroke='%238EBAE5' stroke-opacity='0.35' stroke-width='1.2'/%3E%3C!-- 射線紋 — 從中心到邊緣 --%3E%3Cline x1='50' y1='50' x2='50' y2='15' stroke='%230055A5' stroke-opacity='0.12' stroke-width='1'/%3E%3Cline x1='50' y1='50' x2='50' y2='85' stroke='%230055A5' stroke-opacity='0.12' stroke-width='1'/%3E%3Cline x1='50' y1='50' x2='15' y2='50' stroke='%230055A5' stroke-opacity='0.12' stroke-width='1'/%3E%3Cline x1='50' y1='50' x2='85' y2='50' stroke='%230055A5' stroke-opacity='0.12' stroke-width='1'/%3E%3Cline x1='50' y1='50' x2='25' y2='25' stroke='%238EBAE5' stroke-opacity='0.15' stroke-width='1'/%3E%3Cline x1='50' y1='50' x2='75' y2='25' stroke='%238EBAE5' stroke-opacity='0.15' stroke-width='1'/%3E%3Cline x1='50' y1='50' x2='25' y2='75' stroke='%238EBAE5' stroke-opacity='0.15' stroke-width='1'/%3E%3Cline x1='50' y1='50' x2='75' y2='75' stroke='%238EBAE5' stroke-opacity='0.15' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 圖案 D：藤蔓卷草 (Vine Scroll)
+   巴洛克風格的連續藤蔓線條
+   對稱的 S 曲線在邊緣完美銜接 */
+.az-pattern-vine .az-tile-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='v' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230055A5' stop-opacity='0.40'/%3E%3Cstop offset='100%25' stop-color='%238EBAE5' stop-opacity='0.20'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg%3E%3C!-- 主 S 曲線 — 從左上到右下，對稱 --%3E%3Cpath d='M0,25 Q30,10 50,30 T100,25' fill='none' stroke='url(%23v)' stroke-width='2'/%3E%3Cpath d='M0,75 Q30,90 50,70 T100,75' fill='none' stroke='url(%23v)' stroke-width='2'/%3E%3Cpath d='M25,0 Q10,30 30,50 T25,100' fill='none' stroke='%230055A5' stroke-opacity='0.30' stroke-width='1.8'/%3E%3Cpath d='M75,0 Q90,30 70,50 T75,100' fill='none' stroke='%230055A5' stroke-opacity='0.30' stroke-width='1.8'/%3E%3C!-- 卷草葉片節點 --%3E%3Ccircle cx='30' cy='20' r='5' fill='none' stroke='%238EBAE5' stroke-opacity='0.5' stroke-width='1.2'/%3E%3Ccircle cx='70' cy='30' r='5' fill='none' stroke='%238EBAE5' stroke-opacity='0.5' stroke-width='1.2'/%3E%3Ccircle cx='30' cy='70' r='5' fill='none' stroke='%238EBAE5' stroke-opacity='0.5' stroke-width='1.2'/%3E%3Ccircle cx='70' cy='80' r='5' fill='none' stroke='%238EBAE5' stroke-opacity='0.5' stroke-width='1.2'/%3E%3C!-- 中心花飾 --%3E%3Ccircle cx='50' cy='50' r='12' fill='none' stroke='%230055A5' stroke-opacity='0.30' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='6' fill='none' stroke='%238EBAE5' stroke-opacity='0.40' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='2.5' fill='%23F4C430' fill-opacity='0.55'/%3E%3C!-- 四角卷鬚 — 確保拼接連續性 --%3E%3Cpath d='M10,10 Q20,5 20,15 Q20,20 10,18' fill='none' stroke='%230055A5' stroke-opacity='0.3' stroke-width='1.5'/%3E%3Cpath d='M90,10 Q80,5 80,15 Q80,20 90,18' fill='none' stroke='%230055A5' stroke-opacity='0.3' stroke-width='1.5'/%3E%3Cpath d='M10,90 Q20,95 20,85 Q20,80 10,82' fill='none' stroke='%230055A5' stroke-opacity='0.3' stroke-width='1.5'/%3E%3Cpath d='M90,90 Q80,95 80,85 Q80,80 90,82' fill='none' stroke='%230055A5' stroke-opacity='0.3' stroke-width='1.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── 陶瓷釉面層 (glaze overlay) ── */
+.az-glaze {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  /* 光澤感：頂部亮光 + 底部微暗（模擬高溫燒製釉面） */
+  background:
+    linear-gradient(165deg,
+      rgba(255,255,255,0.18) 0%,
+      rgba(255,255,255,0.04) 30%,
+      transparent 45%,
+      rgba(0,0,0,0.04) 80%,
+      rgba(0,0,0,0.10) 100%);
+  /* 微細紋理 — 模擬陶瓷表面 */
+  background-size: 100% 100%, 3px 3px;
+  /* 裂紋效果（冰裂紋） */
+  box-shadow: inset 0 0 30px rgba(255,255,255,0.03);
+  border-radius: inherit;
+  transition: opacity 0.3s;
+}
+
+/* ── 光澤流動層 (hover shine sweep) ── */
+.az-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 25%,
+    rgba(255,255,255,0.08) 45%,
+    rgba(255,255,255,0.20) 50%,
+    rgba(255,255,255,0.08) 55%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  transition: opacity 0.25s;
+  border-radius: inherit;
+}
+
+.az-tile:hover .az-shine {
+  opacity: 1;
+  animation: az-shine-sweep 1.2s ease-in-out infinite;
+}
+
+@keyframes az-shine-sweep {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── 懸停立體浮起效果 ── */
+.az-tile:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow:
+    inset 0 0 0 1px rgba(245,239,230,0.35),
+    inset 0 2px 0 0 rgba(255,255,255,0.16),
+    inset 0 -1px 0 0 rgba(0,0,0,0.08),
+    0 12px 28px rgba(0,0,0,0.35),
+    0 4px 8px rgba(0,85,165,0.15);
+  z-index: 10 !important;
+}
+
+/* ── 已點擊/旋轉狀態 ── */
+.az-tile.rotated .az-tile-bg {
+  transform: rotate(90deg);
+}
+
+/* ── 控制面板 ── */
+.az-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── 響應式調整 ── */
+@media (max-width: 640px) {
+  .az-wall {
+    gap: 0;
+  }
+}
+
+/* ── 簡化動畫偏好 ── */
+@media (prefers-reduced-motion: reduce) {
+  .az-tile:hover .az-shine {
+    animation: none;
+    opacity: 0;
+  }
+  .az-tile:hover {
+    transform: none;
+  }
+  .az-tile-bg {
+    transition: none;
+  }
+}
