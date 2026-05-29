@@ -64,7 +64,7 @@ export default function TeaRecognition() {
         {/* Upload / Preview */}
         {!preview ? (
           <div onClick={() => fileRef.current?.click()}
-            className="glass rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-white/20 hover:border-white/30 transition-all">
+            className="glass azulejo-marble rounded-3xl p-12 text-center cursor-pointer border-2 border-dashed border-white/20 hover:border-white/30 transition-all">
             <div className="bg-white/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 relative z-10">
               <Camera size={28} className="text-white/60" />
             </div>
@@ -109,7 +109,7 @@ export default function TeaRecognition() {
         <AnimatePresence>
           {result && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6 space-y-3">
-              <div className="glass glass-card rounded-3xl p-6 azulejo-frame">
+              <div className="glass glass-card azulejo-marble rounded-3xl p-6 azulejo-frame">
                 <div className="flex items-center justify-between mb-3 relative z-10">
                   <h2 className="text-2xl font-bold text-white">{result.name}</h2>
                   <span className="bg-herbal-sage-500/20 border border-herbal-sage-400/30 rounded-full px-3 py-1 text-herbal-sage-300 text-sm font-medium">
