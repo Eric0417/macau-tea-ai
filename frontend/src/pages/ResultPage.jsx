@@ -54,7 +54,7 @@ export default function ResultPage() {
     <div className="px-5 pt-12 pb-8 max-w-lg mx-auto">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
         <button onClick={() => navigate('/history')}
-          className="flex items-center gap-2 text-white/50 hover:text-white mb-6 transition-colors text-sm">
+          className="glass-btn glass-btn-cream glass-btn-sm rounded-2xl px-4 py-2 mb-6 text-sm">
           <ArrowLeft size={18} /> {t('result.back')}
         </button>
 

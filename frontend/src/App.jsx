@@ -14,43 +14,36 @@ import ResultPage from './pages/ResultPage';
 const LG_EASE = [0.2, 0.8, 0.2, 1];
 const LG_DURATION = 0.24;
 
-/* ── 葡式瓷磚拉花背景 ──────────────────── */
+/* ── 幾何葡式瓷磚背景 ──────────────────── */
 function Background() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-[#040B18] via-[#060F22] to-[#040A14]">
-      {/* SVG 拉花濾鏡 — 將圓形扭曲成有機流動形狀 */}
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
-        <defs>
-          <filter id="blob-marble">
-            <feTurbulence type="turbulence" baseFrequency="0.012" numOctaves="4" result="warp" />
-            <feDisplacementMap in="SourceGraphic" in2="warp" scale="50" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-          <filter id="blob-marble-sm">
-            <feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="3" result="warp" />
-            <feDisplacementMap in="SourceGraphic" in2="warp" scale="35" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </defs>
-      </svg>
+      {/* 幾何菱形格紋背景 — 規則葡式瓷磚花紋 */}
+      <div className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: `
+            conic-gradient(from 45deg at 50% 50%,
+              transparent 0deg, transparent 87deg,
+              rgba(74,123,200,0.5) 87deg, rgba(74,123,200,0.5) 93deg,
+              transparent 93deg, transparent 180deg,
+              rgba(74,123,200,0.5) 180deg, rgba(74,123,200,0.5) 186deg,
+              transparent 186deg, transparent 270deg,
+              rgba(74,123,200,0.5) 270deg, rgba(74,123,200,0.5) 276deg,
+              transparent 276deg, transparent 360deg
+            )
+          `,
+          backgroundSize: '48px 48px',
+        }} />
 
-      {/* 鈷藍花磚光暈 — 拉花大理石紋 */}
-      <div className="absolute top-1/4 -left-32 w-[28rem] h-[28rem] bg-azulejo-600/20 rounded-full blur-3xl animate-pulse"
-        style={{ filter: 'url(#blob-marble)', animationDelay: '0s' }} />
-      <div className="absolute bottom-1/3 -right-32 w-[24rem] h-[24rem] bg-azulejo-500/15 rounded-full blur-3xl animate-pulse"
-        style={{ filter: 'url(#blob-marble)', animationDelay: '2.5s' }} />
+      {/* 深層鈷藍光暈 */}
+      <div className="absolute top-1/3 -left-24 w-[26rem] h-[26rem] bg-azulejo-600/15 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 -right-24 w-[22rem] h-[22rem] bg-azulejo-500/10 rounded-full blur-[120px]" />
 
-      {/* 奶油白拉花光暈 */}
-      <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl animate-pulse"
-        style={{ filter: 'url(#blob-marble-sm)', animationDelay: '1.5s' }} />
-      <div className="absolute -top-16 right-1/5 w-64 h-64 bg-azulejo-400/8 rounded-full blur-3xl animate-pulse"
-        style={{ filter: 'url(#blob-marble-sm)', animationDelay: '3.5s' }} />
+      {/* 瓷白色光暈 */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/4 rounded-full blur-[100px]" />
 
-      {/* 金色點綴光暈 — 巴洛克金邊 */}
-      <div className="absolute bottom-1/4 left-1/3 w-56 h-56 bg-herbal-gold-500/8 rounded-full blur-3xl animate-pulse"
-        style={{ filter: 'url(#blob-marble-sm)', animationDelay: '5s' }} />
-
-      {/* 深層花磚藍 — 底部幽光 */}
-      <div className="absolute top-2/3 left-2/3 w-48 h-48 bg-azulejo-700/18 rounded-full blur-3xl animate-pulse"
-        style={{ filter: 'url(#blob-marble-sm)', animationDelay: '4s' }} />
+      {/* 底部深藍描邊 */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-azulejo-950/20 to-transparent" />
     </div>
   );
 }

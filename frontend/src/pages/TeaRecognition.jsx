@@ -52,8 +52,8 @@ export default function TeaRecognition() {
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <button onClick={() => navigate('/')}
-            className="glass glass-thin rounded-2xl p-2.5 text-white/70 hover:text-white transition-colors">
-            <ArrowLeft size={20} className="relative z-10" />
+            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-white/70 hover:text-white">
+            <ArrowLeft size={20} />
           </button>
           <div>
             <h1 className="text-2xl font-bold text-white">{t('tea.title')}</h1>
@@ -78,15 +78,14 @@ export default function TeaRecognition() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex gap-3 z-10">
               <button onClick={reset}
-                className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium">
-                <span className="relative z-10">{t('tea.retry')}</span>
+                className="glass-btn glass-btn-cream flex-1 rounded-2xl py-3 text-sm font-medium">
+                {t('tea.retry')}
               </button>
               <button onClick={analyze} disabled={loading}
-                className="flex-1 glass glass-thin rounded-2xl py-3 text-white text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2">
-                <div className="absolute inset-0 bg-herbal-sage-500/45 rounded-2xl pointer-events-none z-0" />
+                className="glass-btn glass-btn-azulejo flex-1 rounded-2xl py-3 text-sm font-medium disabled:opacity-50">
                 {loading
-                  ? <><Loader2 size={16} className="animate-spin relative z-10" /><span className="relative z-10">{t('tea.analyzing')}</span></>
-                  : <><Leaf size={16} className="relative z-10" /><span className="relative z-10">{t('tea.analyze')}</span></>}
+                  ? <><Loader2 size={16} className="animate-spin" /><span>{t('tea.analyzing')}</span></>
+                  : <><Leaf size={16} /><span>{t('tea.analyze')}</span></>}
               </button>
             </div>
           </motion.div>

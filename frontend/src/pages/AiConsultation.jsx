@@ -56,8 +56,8 @@ export default function AiConsultation() {
       <div className="shrink-0 px-5 pt-12 pb-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button onClick={() => navigate('/')}
-            className="glass glass-thin rounded-2xl p-2.5 text-white/70 hover:text-white transition-colors">
-            <ArrowLeft size={20} className="relative z-10" />
+            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-white/70 hover:text-white">
+            <ArrowLeft size={20} />
           </button>
           <div>
             <h1 className="text-xl font-bold text-white">{t('chat.title')}</h1>
@@ -66,8 +66,8 @@ export default function AiConsultation() {
         </div>
         {messages.length > 0 && (
           <button onClick={clear}
-            className="glass glass-thin rounded-2xl p-2.5 text-white/40 hover:text-red-300 transition-colors">
-            <Trash2 size={18} className="relative z-10" />
+            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-white/40 hover:text-red-300">
+            <Trash2 size={18} />
           </button>
         )}
       </div>
@@ -81,8 +81,8 @@ export default function AiConsultation() {
             <div className="flex flex-wrap justify-center gap-2">
               {quickQs.map(q => (
                 <button key={q} onClick={() => setInput(q)}
-                  className="glass glass-thin rounded-2xl px-3 py-2 text-white/50 text-xs">
-                  <span className="relative z-10">{q}</span>
+                  className="glass-btn glass-btn-cream glass-btn-sm rounded-2xl px-3 py-2 text-white/50 text-xs">
+                  {q}
                 </button>
               ))}
             </div>
@@ -92,12 +92,9 @@ export default function AiConsultation() {
         {messages.map((m, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
             className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-xs rounded-2xl px-4 py-3 text-sm leading-relaxed glass glass-thin ${
-              m.role === 'user' ? 'text-white' : 'text-white/80'
+            <div className={`max-w-xs text-sm leading-relaxed ${
+              m.role === 'user' ? 'glass-bubble glass-bubble-user' : 'glass-bubble glass-bubble-ai'
             }`}>
-              {m.role === 'user' && (
-                <div className="absolute inset-0 bg-azulejo-500/22 rounded-2xl pointer-events-none z-0" />
-              )}
               <p className="whitespace-pre-wrap relative z-10">{m.content}</p>
             </div>
           </motion.div>
@@ -105,10 +102,10 @@ export default function AiConsultation() {
 
         {loading && (
           <div className="flex justify-start">
-            <div className="glass glass-thin rounded-2xl px-4 py-3 flex gap-1.5">
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce relative z-10" />
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce relative z-10" style={{ animationDelay: '0.15s' }} />
-              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce relative z-10" style={{ animationDelay: '0.3s' }} />
+            <div className="glass-bubble glass-bubble-ai flex gap-1.5">
+              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" />
+              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
+              <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />
             </div>
           </div>
         )}
@@ -122,11 +119,10 @@ export default function AiConsultation() {
           <input value={input} onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
             placeholder={t('chat.placeholder')}
-            className="flex-1 glass glass-thin rounded-2xl px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-white/40 transition-all relative z-10" />
+            className="flex-1 glass glass-thin rounded-2xl px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-azulejo-400/40 transition-all relative z-10" />
           <button onClick={send} disabled={!input.trim() || loading}
-            className="glass glass-thin rounded-2xl px-4 text-white disabled:opacity-30 transition-all">
-            <div className="absolute inset-0 bg-azulejo-500/45 rounded-2xl pointer-events-none z-0" />
-            <Send size={18} className="relative z-10" />
+            className="glass-btn glass-btn-azulejo rounded-2xl px-4 disabled:opacity-30">
+            <Send size={18} />
           </button>
         </div>
       </div>

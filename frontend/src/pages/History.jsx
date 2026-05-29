@@ -42,15 +42,15 @@ export default function History() {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <button onClick={() => navigate('/')}
-            className="glass glass-thin rounded-2xl p-2.5 text-white/70 hover:text-white transition-colors">
-            <ArrowLeft size={20} className="relative z-10" />
+            className="glass-btn glass-btn-ghost rounded-2xl p-2.5 text-white/70 hover:text-white">
+            <ArrowLeft size={20} />
           </button>
           <h1 className="text-2xl font-bold text-white">{t('history.title')}</h1>
         </div>
         {records.length > 0 && (
           <button onClick={clearAll}
-            className="glass glass-thin rounded-2xl px-3 py-2 text-white/50 text-xs hover:text-red-300 transition-colors">
-            <span className="relative z-10">{t('history.clearAll')}</span>
+            className="glass-btn glass-btn-cream glass-btn-sm rounded-2xl px-3 py-2 text-white/50 text-xs hover:text-red-300">
+            {t('history.clearAll')}
           </button>
         )}
       </div>
@@ -79,7 +79,7 @@ export default function History() {
                   <p className="text-white font-medium text-sm truncate">{r.type === 'tea' ? r.name : r.constitution}</p>
                   <p className="text-white/35 text-xs mt-0.5">{fmt(r.created_at)}</p>
                 </button>
-                <button onClick={() => del(r.id)} className="text-white/15 hover:text-red-400 transition-colors p-1 relative z-10"><Trash2 size={15} /></button>
+                <button onClick={() => del(r.id)} className="text-white/15 hover:text-red-400 p-1"><Trash2 size={15} /></button>
                 <ChevronRight size={15} className="text-white/15 relative z-10" />
               </motion.div>
             ))}
