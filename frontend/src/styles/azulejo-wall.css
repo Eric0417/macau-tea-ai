@@ -22,8 +22,8 @@
     inset 0 1px 0 0 rgba(255,255,255,0.12),
     inset 0 -1px 0 0 rgba(0,0,0,0.10),
     0 0 0 0.5px rgba(0,0,0,0.08);
-  transition: transform 0.35s var(--lg-ease),
-              box-shadow 0.35s var(--lg-ease),
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
               z-index 0s step-end;
   z-index: 1;
   overflow: hidden;
@@ -36,7 +36,7 @@
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  transition: transform 0.45s var(--lg-ease);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* ── 四種花磚圖案 (純 SVG data URI) ── */
@@ -131,11 +131,6 @@
     0 12px 28px rgba(0,0,0,0.35),
     0 4px 8px rgba(0,85,165,0.15);
   z-index: 10 !important;
-}
-
-/* ── 已點擊/旋轉狀態 ── */
-.az-tile.rotated .az-tile-bg {
-  transform: rotate(90deg);
 }
 
 /* ── 控制面板 ── */
